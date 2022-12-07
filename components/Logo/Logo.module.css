@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+.logoContainer {
+    width: 67px;
+    height: 58px;
+}
+
+.image {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+}
+
+.logoText {
+    font-family: "Monda", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    white-space: nowrap;
+}
+@media screen and (min-width: 1024px) {
+    .logoContainer {
+        width: 81.89px;
+        height: 71px;
+    }
+    .logoText {
+        font-size: 36px;
+    }
+}
