@@ -1,5 +1,7 @@
-html,
-body {
+/* Import fonts for the project */
+@import url('https://fonts.googleapis.com/css2?family=Monda:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -13,14 +15,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
 }
