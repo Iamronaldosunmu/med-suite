@@ -1,0 +1,47 @@
+.buttonGroupContainer {
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 50px;
+  align-items: center;
+}
+
+.button {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  border: 0;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  max-width: 508px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 340px) {
+  .button {
+    font-size: 18px;
+    padding: 10px;
+  }
+}
+
+.button.orange {
+  background-color: #ff6b00;
+}
+.button.purple {
+  background-color: #7777d6;
+}
+
+@media screen and (min-width: 1024px) {
+    .buttonGroupContainer {
+        flex-direction: row;
+        padding: 0px;
+        max-width: 525px;
+    }
+    .button {
+        font-size: 16px;
+        padding: 10px;
+      }
+}
