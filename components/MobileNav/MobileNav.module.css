@@ -1,0 +1,22 @@
+.topRectangle {
+    width: 38px;
+    height: 3px;
+    background-color: black;
+}
+.bottomRectangle {
+    width: 26px;
+    height: 3.5px;
+    background-color: black;
+
+}
+.mobilenavContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    align-items: end;
+}
+@media screen and (min-width: 768px ) {
+    .mobilenavContainer {
+        display: none;
+    }
+}
