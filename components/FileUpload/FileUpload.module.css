@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.label {
+  font-size: 18px;
+}
+
+.uploadContainer {
+  width: 100%;
+  padding: 40px 20px;
+  border: 2px dashed #D9D9D9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #fafcfe;
+  cursor: pointer;
+}
+.folderImage {
+  width: 44px;
+}
+.text {
+  color: #d9d9d9;
+}
+.uploaded {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
