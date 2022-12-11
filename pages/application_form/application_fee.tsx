@@ -18,7 +18,7 @@ const ApplicationFee = () => {
         </div>
         <Button
           color="#11C981"
-          path="/application_form/documents"
+          path=""
           text="Pay N2,500"
         />
         <Button path="/application_form/documents" text="Prev < Experience" />
