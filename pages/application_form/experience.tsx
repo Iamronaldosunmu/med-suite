@@ -51,7 +51,7 @@ const Experience = () => {
                 orange
               />
               <Button
-                path="/application_form/documents"
+                path="/application_form/experience"
                 text="Prev < Experience"
               />
             </div>
