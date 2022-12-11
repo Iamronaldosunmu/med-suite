@@ -51,7 +51,13 @@ const Signup: NextPage = () => {
                   value={confirmPassword}
                 />
               </section>
-              <button onClick={() => router.push("/application_form/contact_details")} className={styles.signupButton}>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/application_form/contact_details");
+                }}
+                className={styles.signupButton}
+              >
                 Create account
               </button>
             </form>
