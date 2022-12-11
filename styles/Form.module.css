@@ -1,0 +1,78 @@
+.logoContainer {
+  margin-top: 33px;
+  margin-left: 26px;
+}
+.progressbarContainer {
+  margin-top: 72px;
+}
+.contactSection {
+  margin-top: 49px;
+  margin-bottom: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0.5;
+  text-align: center;
+}
+.formSection {
+  max-width: 623px;
+  margin: 100px auto;
+}
+.formSection form,
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+.formSection form button {
+  margin-top: 30px;
+}
+.paystackLogoContainer {
+  width: 95px;
+  height: 95px;
+  border-radius: 10px;
+  background-color: #09a5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px auto;
+}
+.applicationFeeContainer {
+    max-width: 378px;
+    margin: 150px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+}
+
+@media screen and (max-width: 1024px) {
+  .formSection {
+    margin: 14px auto;
+    padding: 26px;
+  }
+  .progressbarContainer {
+    margin-top: 34px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .formGrid {
+    max-width: 800px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 44px;
+    row-gap: 65px;
+  }
+  /* .outlier {
+        max-width: 289.5px;
+        margin: 42px auto 0;
+    } */
+}
+@media screen and (max-width: 1024px) {
+    .applicationFeeContainer {
+        max-width: 275px;
+        margin: 100px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
