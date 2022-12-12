@@ -7,6 +7,7 @@ import InputGroup from "../../components/InputGroup";
 import Logo from "../../components/Logo";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/Signup.module.css";
+import "../../styles/Signup.module.css"
 
 const Signup: NextPage = () => {
   const [email, setEmail] = useState<string>("");
