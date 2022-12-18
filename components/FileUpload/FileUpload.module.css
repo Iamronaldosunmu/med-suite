@@ -1,7 +1,7 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .label {
@@ -10,8 +10,9 @@
 
 .uploadContainer {
   width: 100%;
+  max-height: 156px;
   padding: 40px 20px;
-  border: 2px dashed #D9D9D9;
+  border: 2px dashed #d9d9d9;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -27,7 +28,21 @@
   color: #d9d9d9;
 }
 .uploaded {
-    display: flex;
-    gap: 12px;
-    align-items: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+}
+.error {
+  color: #ff0000;
+  font-size: 14px;
+  position: relative;
+  bottom: 11px;
+}
+.fileName {
+  color: black;
+  transition: all 0.2s;
+}
+.fileName:hover {
+  color: #8ab4f8;
 }
