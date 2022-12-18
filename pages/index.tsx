@@ -10,7 +10,7 @@ const Home = () => {
     <FadeIn>
       <div className={styles.pageContainer}>
         <Head>
-          <title>Med Suite - Visa Sponsored Jobs for Nigerian Nurses</title>
+          <title>Med Suite - Visa Sponsored Jobs for African Nurses</title>
         </Head>
         <Navbar />
         <section className={styles.container}>
