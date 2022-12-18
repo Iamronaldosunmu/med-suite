@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  background-color: #fff9e9;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.textContainer {
+}
+.exclamationIcon {
+  width: 24px;
+  height: 24px;
+  fill: white
+}
