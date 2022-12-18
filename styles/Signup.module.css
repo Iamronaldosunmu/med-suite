@@ -1,5 +1,5 @@
 .main {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .signupForm {
@@ -33,61 +33,73 @@
   }
 }
 
-
 .signupButton {
   width: 100%;
-  margin-top: 66px;
-  padding: 8px;
+  margin-top: 56px;
   border-radius: 8px;
   border: 0px;
-  padding: 13px 0px;
+  /* padding: 13px 0px; */
   font-size: 20px;
   font-weight: bold;
   color: white;
-  background-color: #FF6B00;
+  background-color: #ff6b00;
   cursor: pointer;
+  height: 53px;
 }
 
-.navTextContainer div{
-    max-width: 660px;
-    margin:0px auto;
+.navTextContainer div {
+  max-width: 660px;
+  margin: 0px auto;
 }
 .imageContainer {
-    width: 100%;
-    height: 100vh;
-    display: none;
-    position: relative;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  position: relative;
 }
 .bgImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 @media screen and (min-width: 1024px) {
-    .imageContainer {
-        display: block;
-    }
-    .pageContainer {
-        display: grid;
-        grid-template-columns: 53% 47%;
-    }
-    .navTextContainer div{
-        width: 100%;
-        /* max-width: 508px; */
-        margin: 0px;
-        display: flex;
-        flex-direction: column;
-    }
-    .navTextContainer {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .imageContainer {
+    display: block;
+  }
+  .pageContainer {
+    display: grid;
+    grid-template-columns: 53% 47%;
+  }
+  .navTextContainer div {
+    width: 100%;
+    /* max-width: 508px; */
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  .navTextContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .logo {
-    position: absolute;
-    top: 13px;
-    left: 23px;
+  position: absolute;
+  top: 13px;
+  left: 23px;
+}
+.backendError {
+  color: #ff0000;
+  font-size: 16px;
+  text-align: center;
+  margin: 20px 0px 0px;
+}
+
+.navTitleSubText {
+  text-align: center;
+}
+.navTitleSubText span {
+  color: #ff0000;
 }
