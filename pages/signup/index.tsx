@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import FadeIn from "../../components/FadeIn";
 import InputGroup from "../../components/InputGroup";
 import Logo from "../../components/Logo";
@@ -13,6 +13,15 @@ import {
   validateSignupInputs,
   validateTextField,
 } from "../../utilities/TextFieldValidation";
+import client from "../api/Services/AxiosClient";
+import { useCookies } from "react-cookie";
+import jwtDecode from "jwt-decode";
+import User from "../../Types/User";
+import { UserContext } from "../../components/Context/UserContext";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import LottieAnimation from "../../components/Lottie";
+import LoaderData from "../../components/Lottie/loader.json"
 
 interface ErrorProps {
   email?: string;
@@ -21,6 +30,7 @@ interface ErrorProps {
 }
 
 const Signup: NextPage = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -29,11 +39,46 @@ const Signup: NextPage = () => {
     password: "",
     confirmPassword: "",
   });
-  const onSubmit = (e: FormEvent) => {
+  const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+  const [backendError, setBackendError] = useState("");
+  const router = useRouter();
+
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrors(validateSignupInputs({ email, password, confirmPassword }));
+    if (
+      email &&
+      password &&
+      confirmPassword &&
+      Object.values(errors).every((value) => !Boolean(value))
+    ) {
+      try {
+        setLoading(true);
+        setBackendError("");
+        const payload = { email, password };
+        const { data } = await client.post("/users/signup", payload);
+        const { token } = data;
+        const user: User = jwtDecode(token);
+        console.log(user);
+        setUser(user);
+        setCookie("user", user, {
+          path: "/",
+          expires: new Date(Date.now() + 2 * 86400000),
+        });
+        router.push("/application_form/contact_details");
+      } catch (error: any) {
+        if (error.response.status == 400)
+          setBackendError(error.response?.data?.message);
+        else {
+          alert(error.response?.data?.message);
+        }
+        console.log(error.response.data);
+      } finally {
+        setLoading(false);
+      }
+    }
   };
-  const router = useRouter();
 
   return (
     <FadeIn>
@@ -54,6 +99,12 @@ const Signup: NextPage = () => {
           <section className={styles.navTextContainer}>
             <div>
               <h1 className={styles.navTitle}>Create an Account</h1>
+              <p className={styles.navTitleSubText}>
+                Already have an account?{" "}
+                <Link href={"/login"}>
+                  <span>Login</span>
+                </Link>
+              </p>
               <form onSubmit={onSubmit} className={styles.signupForm}>
                 <section className={styles.inputsContainer}>
                   <InputGroup
@@ -110,7 +161,22 @@ const Signup: NextPage = () => {
                     }
                   />
                 </section>
-                <button className={styles.signupButton}>Create account</button>
+                <AnimatePresence>
+                  {backendError && (
+                    <motion.p
+                      className={styles.backendError}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      {backendError}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+                <button className={styles.signupButton}>
+                  {!loading && <span>Create account</span>}
+                  {loading && <LottieAnimation animationData={LoaderData} width={55} height={55} />}
+                </button>
               </form>
             </div>
           </section>
