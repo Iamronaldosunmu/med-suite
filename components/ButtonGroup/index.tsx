@@ -5,10 +5,16 @@ const ButtonGroup = () => {
   const router = useRouter();
   return (
     <div className={styles.buttonGroupContainer}>
-      <button onClick={() => router.push("/signup")} className={`${styles.button} ${styles.purple}`}>
+      <button
+        onClick={() => router.push("/signup")}
+        className={`${styles.button} ${styles.purple}`}
+      >
         Start Application
       </button>
-      <button className={`${styles.button} ${styles.orange}`}>
+      <button
+        onClick={() => router.push("/login")}
+        className={`${styles.button} ${styles.orange}`}
+      >
         Continue Application
       </button>
     </div>
