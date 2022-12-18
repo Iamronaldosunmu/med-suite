@@ -128,7 +128,7 @@ const Signup: NextPage = () => {
             <div>
               <h1 className={styles.navTitle}>Login to Your Account</h1>
               <p className={styles.navTitleSubText}>
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href={"/signup"}>
                   <span>Sign Up</span>
                 </Link>
