@@ -214,12 +214,13 @@ const ContactDetails = () => {
                 }
                 .flag-dropdown {
                   background-color: #ebebeb !important;
+                  border-radius: 8px;
                 }
                 .selected-flag:hover {
                   background-color: #ebebeb !important;
                 }
                 .form-control {
-                  height: 51.4px;
+                  height: 51.4px !important;
                 }
                 @media screen and (max-width: 1024px) {
                   .form-control {
