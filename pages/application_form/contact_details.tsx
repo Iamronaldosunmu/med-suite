@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import Button from "../../components/Button";
 import InputGroup from "../../components/InputGroup";
 import Logo from "../../components/Logo";
@@ -74,7 +74,11 @@ const ContactDetails = () => {
     street: "",
     state: "",
   });
-
+  useEffect(() => {
+    if (!cookies.user || !cookies.applicant) {
+      router.push("/login");
+    }
+  });
   const updateCookies = async () => {
     const { data: applicantData } = await client.get(
       `/applicant/${cookies.user.applicantId}`
