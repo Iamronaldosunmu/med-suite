@@ -185,7 +185,7 @@ const Documents = () => {
                 fieldName="evidenceOfRegistration"
                 file={evidenceOfRegistration}
                 setFile={setEvidenceOfRegistration}
-                label="Evidence of Registration with the Nigerian Nursing Council"
+                label="Evidence of Registration in the Nursing Council of Your Home Country"
                 error={errors.evidenceOfRegistration}
                 onFileUpload={() =>
                   setErrors({ ...errors, evidenceOfRegistration: "" })

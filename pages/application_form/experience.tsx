@@ -143,7 +143,7 @@ const Experience = () => {
               }
             />
             <SelectInput
-              label="Post-Graduate Working Experience"
+              label="Experience in Post Graduate Nursing Specialty Area"
               value={postGraduateExperience}
               setValue={setPostGraduateExperience}
               options={experienceOptions}
