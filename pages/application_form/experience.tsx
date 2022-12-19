@@ -171,7 +171,7 @@ const Experience = () => {
               onFileUpload={() => setErrors({ ...errors, proofOfWork: "" })}
               label="Proof of working experience in a hospital setting in the last 12 months"
             />
-          <InfoMessage text={"Kindly request for a letter of Good Standing from the Nursing and Midwifery Council in your country which will verify among other things, your nursing education and license. The letter should be addressed medsuiteofficial@gmail.com"} />
+          <InfoMessage text={"Kindly request for a letter of Good Standing from the Nursing and Midwifery Council in your country which will verify among other things, your nursing education and license. The letter should be addressed to medsuiteofficial@gmail.com. Please note that applications will not be processed without the receipt of this letter"} />
           <InfoMessage text={"You may have to make a payment to the Nursing and Midwifery Council in your country to enable Dataflow Group initiate the verification request for your credential verification"} />
 
             <div>
@@ -185,7 +185,7 @@ const Experience = () => {
               </div>
               <Button
                 onClick={onGoBack}
-                text="Prev < Experience"
+                text="Prev < Documents"
               />
             </div>
           </form>
