@@ -21,7 +21,7 @@ import { UserContext } from "../../components/Context/UserContext";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import LottieAnimation from "../../components/Lottie";
-import LoaderData from "../../components/Lottie/loader.json"
+import LoaderData from "../../components/Lottie/loader.json";
 
 interface ErrorProps {
   email?: string;
@@ -30,7 +30,7 @@ interface ErrorProps {
 }
 
 const Signup: NextPage = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -64,7 +64,14 @@ const Signup: NextPage = () => {
         setUser(user);
         setCookie("user", user, {
           path: "/",
-          expires: new Date(Date.now() + 2 * 86400000),
+          maxAge: 1800,
+        });
+        const { data: applicantData } = await client.get(
+          `/applicant/${user.applicantId}`
+        );
+        setCookie("applicant", applicantData.applicant, {
+          path: "/",
+          maxAge: 1800,
         });
         router.push("/application_form/contact_details");
       } catch (error: any) {
@@ -175,7 +182,13 @@ const Signup: NextPage = () => {
                 </AnimatePresence>
                 <button className={styles.signupButton}>
                   {!loading && <span>Create account</span>}
-                  {loading && <LottieAnimation animationData={LoaderData} width={55} height={55} />}
+                  {loading && (
+                    <LottieAnimation
+                      animationData={LoaderData}
+                      width={55}
+                      height={55}
+                    />
+                  )}
                 </button>
               </form>
             </div>
