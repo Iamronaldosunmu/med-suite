@@ -45,9 +45,10 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const textRef = useRef<HTMLParagraphElement>(null);
   const [loading, setLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const uploadImage = useRef<HTMLImageElement>(null);
   const onUploadContainerClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    if (e.target == containerRef.current || e.target == textRef.current)
+    if (e.target == containerRef.current || e.target == textRef.current || e.target == uploadImage.current)
       fileInputRef.current!.click();
   };
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +125,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                ref={uploadImage}
                 className={styles.folderImage}
                 src="/icons/uploadIcon.svg"
               />
