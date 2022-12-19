@@ -254,6 +254,7 @@ interface DocumentInput {
   resume: DocumentProps;
   referenceLetter: DocumentProps;
   birthCertificate: DocumentProps;
+  profilePicture: DocumentProps;
 }
 
 export const validateDocumentInputs = (payload: DocumentInput) => {
@@ -279,6 +280,9 @@ export const validateDocumentInputs = (payload: DocumentInput) => {
     birthCertificate: payload.birthCertificate!.secure_url
       ? ""
       : '"Birth Certificate" is not allowed to be empty',
+    profilePicture: payload.profilePicture!.secure_url
+      ? ""
+      : "'Profile Picture is not allowed to be empty",
   };
 
   return result;
