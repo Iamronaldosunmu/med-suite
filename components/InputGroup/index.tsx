@@ -7,7 +7,7 @@ interface InputGroupProps {
   setValue: Dispatch<SetStateAction<string>>;
   value: string;
   error?: string;
-  onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 }
 const InputGroup: React.FC<InputGroupProps> = ({
