@@ -1,0 +1,59 @@
+.logoContainer {
+  margin-top: 33px;
+  margin-left: 26px;
+}
+
+.mainImageContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.mainImageContainer img {
+  max-width: 320px;
+  width: 100%;
+}
+.bigText {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+}
+.smallText {
+  font-family: "Poppins", sans-serif;
+  width: 85%;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 14px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 300px;
+  margin: 20px auto 20px;
+  margin-bottom: 40px;
+}
+.buttonGroup button {
+  font-family: "Poppins", sans-serif;
+  padding: 10px 5px;
+  border-radius: 8px;
+  border: 0;
+  background-color: #FF6B00;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .buttonGroup {
+    max-width: 400px;
+  }
+  .smallText {
+    margin: 24px auto;
+  }
+  .buttonGroup button {
+    font-size: 18px;
+  }
+}
