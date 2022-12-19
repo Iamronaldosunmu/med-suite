@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  background-color: #fff9e9;
+  background-color: #fdedee;
   border-radius: 10px;
   font-size: 14px;
   padding: 20px;
@@ -13,5 +13,5 @@
 .exclamationIcon {
   width: 24px;
   height: 24px;
-  fill: white
+  fill: white;
 }
