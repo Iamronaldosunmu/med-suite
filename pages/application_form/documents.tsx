@@ -25,6 +25,7 @@ interface DocumentErrorsProps {
   resume: string | undefined;
   referenceLetter: string | undefined;
   birthCertificate: string | undefined;
+  profilePicture: string | undefined;
 }
 
 const Documents = () => {
@@ -43,6 +44,8 @@ const Documents = () => {
     useState<DocumentProps>(defaultDocument);
   const [birthCertificate, setBirthCirtificate] =
     useState<DocumentProps>(defaultDocument);
+  const [profilePicture, setProfilePicture] =
+    useState<DocumentProps>(defaultDocument);
 
   const [loading, setLoading] = useState(false);
   const [prevLoading, setPrevLoading] = useState(false);
@@ -60,6 +63,7 @@ const Documents = () => {
       setResume(cookies.applicant?.documents?.resume);
       setReferenceLetters(cookies.applicant?.documents?.referenceLetter);
       setBirthCirtificate(cookies.applicant?.documents?.birthCertificate);
+      setProfilePicture(cookies.applicant?.documents?.profilePicture);
     }
   }, []);
   const [errors, setErrors] = useState<DocumentErrorsProps>({
@@ -70,6 +74,7 @@ const Documents = () => {
     resume: "",
     referenceLetter: "",
     birthCertificate: "",
+    profilePicture: "",
   });
 
   const onSubmit = async (e: FormEvent) => {
@@ -83,6 +88,7 @@ const Documents = () => {
         resume,
         referenceLetter,
         birthCertificate,
+        profilePicture,
       })
     );
 
@@ -111,7 +117,10 @@ const Documents = () => {
           `/applicant/documents/${cookies.user.applicantId}`,
           payload
         );
-        setCookie("applicant", {...cookies.applicant, documents: payload})
+        setCookie("applicant", { ...cookies.applicant, documents: payload }, {
+          path: "/",
+          maxAge: 1800
+        });
         router.push("/application_form/experience");
       } catch (error: any) {
         console.log(error);
@@ -132,7 +141,10 @@ const Documents = () => {
       const { data: applicantData } = await client.get(
         `/applicant/${cookies.user.applicantId}`
       );
-      setCookie("applicant", applicantData.applicant);
+      setCookie("applicant", applicantData.applicant, {
+        path: "/",
+        maxAge: 1800
+      });
       router.push("/application_form/contact_details");
     } catch (error) {
       console.log(error);
@@ -209,8 +221,16 @@ const Documents = () => {
                   setErrors({ ...errors, referenceLetter: "" })
                 }
               />
-            </div>
-            <div className={styles.outlier}>
+              <FileUpload
+                fieldName="profilePicture"
+                file={profilePicture}
+                setFile={setProfilePicture}
+                label="Profile Picture"
+                error={errors.profilePicture}
+                onFileUpload={() =>
+                  setErrors({ ...errors, profilePicture: "" })
+                }
+              />
               <FileUpload
                 fieldName="birthCertificate"
                 file={birthCertificate}
@@ -222,6 +242,8 @@ const Documents = () => {
                 }
               />
             </div>
+            {/* <div className={styles.outlier}>
+            </div> */}
             <div>
               <Button
                 loading={loading}
