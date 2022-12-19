@@ -94,7 +94,21 @@ const Signup: NextPage = () => {
           path: "/",
           expires: new Date(Date.now() + 2 * 86400000),
         });
-        router.push("/application_form/contact_details");
+        if (!applicantData.applicant.paymentCompleted) {
+          const noContactDetailsErrors = Object.values(
+            validateContactDetailsInputs({ ...applicantData.applicant.contactDetails })
+          ).every((value) => !Boolean(value));
+          const noDocumentErrors = Object.values(
+            validateDocumentInputs({ ...applicantData.applicant.documents })
+          ).every((value) => !Boolean(value));
+          const noExperienceErrors = Object.values(
+            validateExperienceInputs({ ...applicantData.applicant.experience })
+          ).every((value) => !Boolean(value));
+          console.log(noContactDetailsErrors, noDocumentErrors, noExperienceErrors)
+          router.push("/application_form/contact_details");
+        } else {
+          router.push("/payment_successful");
+        }
       } catch (error: any) {
         if (error.response.status == 400)
           setBackendError(error.response?.data?.message);
