@@ -46,21 +46,22 @@ const Signup: NextPage = () => {
   useEffect(() => {
     if (cookies.user && cookies.applicant) {
       if (!cookies.applicant.paymentCompleted) {
-        const noContactDetailsErrors = Object.values(
-          validateContactDetailsInputs({ ...cookies.applicant.contactDetails })
-        ).every((value) => !Boolean(value));
-        const noDocumentErrors = Object.values(
-          validateDocumentInputs({ ...cookies.applicant.documents })
-        ).every((value) => !Boolean(value));
-        const noExperienceErrors = Object.values(
-          validateExperienceInputs({ ...cookies.applicant.experience })
-        ).every((value) => !Boolean(value));
+        // const noContactDetailsErrors = Object.values(
+        //   validateContactDetailsInputs({ ...cookies.applicant.contactDetails })
+        // ).every((value) => !Boolean(value));
+        // const noDocumentErrors = Object.values(
+        //   validateDocumentInputs({ ...cookies.applicant.documents })
+        // ).every((value) => !Boolean(value));
+        // const noExperienceErrors = Object.values(
+        //   validateExperienceInputs({ ...cookies.applicant.experience })
+        // ).every((value) => !Boolean(value));
 
-        if (noContactDetailsErrors && noDocumentErrors && noExperienceErrors) {
-          router.push("/application_form/application_fee");
-        } else {
-          router.push("/application_form/contact_details");
-        }
+        // if (noContactDetailsErrors && noDocumentErrors && noExperienceErrors) {
+        //   router.push("/application_form/application_fee");
+        // } else {
+        //   router.push("/application_form/contact_details");
+        router.push(`/application_form/${cookies.applicant.currentPage}`);
+        // }
       } else {
         router.push("/payment_successful");
       }
@@ -87,35 +88,43 @@ const Signup: NextPage = () => {
         );
         setCookie("applicant", applicantData.applicant, {
           path: "/",
-          expires: new Date(Date.now() + 2 * 86400000),
+          maxAge: 1800,
         });
         setUser(user);
         setCookie("user", user, {
           path: "/",
-          expires: new Date(Date.now() + 2 * 86400000),
+          maxAge: 1800,
         });
         if (!applicantData.applicant.paymentCompleted) {
-          const noContactDetailsErrors = Object.values(
-            validateContactDetailsInputs({ ...applicantData.applicant.contactDetails })
-          ).every((value) => !Boolean(value));
-          const noDocumentErrors = Object.values(
-            validateDocumentInputs({ ...applicantData.applicant.documents })
-          ).every((value) => !Boolean(value));
-          const noExperienceErrors = Object.values(
-            validateExperienceInputs({ ...applicantData.applicant.experience })
-          ).every((value) => !Boolean(value));
-          console.log(noContactDetailsErrors, noDocumentErrors, noExperienceErrors)
-          router.push("/application_form/contact_details");
+          // const noContactDetailsErrors = Object.values(
+          //   validateContactDetailsInputs({
+          //     ...applicantData.applicant.contactDetails,
+          //   })
+          // ).every((value) => !Boolean(value));
+          // const noDocumentErrors = Object.values(
+          //   validateDocumentInputs({ ...applicantData.applicant.documents })
+          // ).every((value) => !Boolean(value));
+          // const noExperienceErrors = Object.values(
+          //   validateExperienceInputs({ ...applicantData.applicant.experience })
+          // ).every((value) => !Boolean(value));
+          // console.log(
+          //   noContactDetailsErrors,
+          //   noDocumentErrors,
+          //   noExperienceErrors
+          // );
+          router.push(
+            `application_form/${applicantData.applicant.currentPage}`
+          );
         } else {
           router.push("/payment_successful");
         }
       } catch (error: any) {
-        if (error.response.status == 400)
+        if (error.response?.status == 400)
           setBackendError(error.response?.data?.message);
         else {
           alert(error.response?.data?.message);
         }
-        console.log(error.response.data);
+        console.log(error.response?.data);
       } finally {
         setLoading(false);
       }
