@@ -1,18 +1,21 @@
 .navbarContainer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index: 10;
 }
 @media screen and (min-width: 1024px) {
-    .navbarContainer {
-        padding: 33px 30px;
-    }
+  .navbarContainer {
+    padding: 33px 30px;
+  }
 }
 @media screen and (min-width: 1280px) {
-    .navbarContainer {
-        padding: 33px 60px;
-    }
-    
+  .navbarContainer {
+    padding: 33px 60px;
+  }
 }
