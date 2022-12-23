@@ -1,6 +1,9 @@
 /* Import fonts for the project */
-@import url('https://fonts.googleapis.com/css2?family=Monda:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Monda:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
 
+body {
+  overflow-x: hidden;
+}
 * {
   padding: 0;
   margin: 0;
