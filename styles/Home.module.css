@@ -1,6 +1,7 @@
 .pageContainer {
   max-width: 1440px;
   margin: 0px auto;
+  padding-top: 60px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -12,6 +13,9 @@
     height: calc(100vh - 137px);
     position: relative;
     bottom: 67.5px;
+  }
+  .pageContainer {
+    padding-top: 135px;
   }
 
 }
