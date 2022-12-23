@@ -1,0 +1,16 @@
+.container {
+  margin-bottom: 10px;
+}
+.title {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  display: inline-block;
+  margin-right: 14px;
+  color: #ff6b00;
+}
+.text {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  color: #000000;
+  opacity: 0.55;
+}
