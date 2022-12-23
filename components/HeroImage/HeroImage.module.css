@@ -1,15 +1,30 @@
-
-
 .container {
   position: relative;
 }
-@media screen and (max-width: 1024px) {
-    .container {
-        display: none;
-    }
+.mobileContainer {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+  padding: 0px 20px;
+  margin: 30px auto;
 }
+@media screen and (max-width: 1024px) {
+  .container {
+    display: none;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .mobileContainer {
+    display: none;
+  }
+}
+.mobileContainer .heroimageContainer {
+  height: 250px;
+}
+
 .heroimageContainer {
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   height: 434px;
   background-color: #00d1ff;
   overflow: hidden;
@@ -20,18 +35,28 @@
   height: 100%;
 }
 .topleftImage {
-    position: absolute;
-    top: -30px;
-    left: -30px;
+  position: absolute;
+  top: -30px;
+  left: -30px;
+}
+.mobileContainer .topleftImage {
+  width: 60px;
+  top: -15px;
+  left: -15px;
 }
 .bottomrightImage {
-    position: absolute;
-    bottom: -20px;
-    right: -10px;
-    width: 60px;
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  width: 60px;
+}
+.mobileContainer .bottomrightImage {
+  width: 40px;
+  bottom: -10px;
+  right: 0px;
 }
 @media screen and (min-width: 1024px) {
-    .heroimageContainer {
-        width: 380px;
-    }
+  .heroimageContainer {
+    width: 380px;
+  }
 }

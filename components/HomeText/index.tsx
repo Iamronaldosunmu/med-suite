@@ -1,5 +1,6 @@
 import ButtonGroup from "../ButtonGroup";
 import styles from "./HomeText.module.css";
+import heroImageStyles from "../HeroImage/HeroImage.module.css";
 
 const HomeText = () => {
   return (
@@ -12,6 +13,23 @@ const HomeText = () => {
         nurse with over two years of industry experience, you should definitely
         apply.
       </p>
+      <div className={heroImageStyles.mobileContainer}>
+        <figure className={heroImageStyles.heroimageContainer}>
+          <img
+            className={heroImageStyles.nurseImage}
+            src="/images/nurseimage.png"
+          />
+        </figure>
+        <img
+          className={heroImageStyles.topleftImage}
+          src="/images/topleft.svg"
+        />
+        <img
+          className={heroImageStyles.bottomrightImage}
+          src="/icons/bottomright.svg"
+        />
+      </div>
+
       <ButtonGroup />
     </article>
   );
