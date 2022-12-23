@@ -1,0 +1,111 @@
+.infoMessagesContainer {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 1024px) {
+  .infoMessagesContainer {
+    padding: 10px 0px;
+    max-width: 650px;
+    margin: 0px auto;
+  }
+}
+
+.overflowContent {
+  overflow-x: hidden;
+}
+
+.mainContainer {
+  width: 100vw;
+  padding-top: 120px
+}
+
+.profilePicContainer {
+  min-width: 61px;
+  min-height: 61px;
+  border-radius: 50%;
+  background-color: grey;
+  overflow: hidden;
+}
+.applicantDetails {
+  margin-top: 20px;
+  padding: 0px 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+@media screen and (min-width: 1024px) {
+  .applicantDetails {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 0px;
+  }
+}
+
+.profilePic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.orangeText {
+  color: #ff6b00;
+}
+.clipped {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  padding: 30px 20px 20px;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+@media screen and (min-width: 1024px) {
+  .nav {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 0px;
+  }
+}
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.content {
+  /* width: 300vw; */
+  /* padding: 20px; */
+  display: flex;
+}
+.gridColumn {
+  min-width: 100vw;
+  padding: 20px;
+}
+.documentContainer div {
+  /* padding: 20px; */
+  /* width: 100%; */
+}
+.gridColumn.contactDetails div {
+  padding: 20px;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+}
+@media screen and (min-width: 1024px) {
+  .gridColumn.contactDetails div {
+    max-width: 650px;
+    margin: 20px auto;
+  }
+}
+.smallHeader {
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
