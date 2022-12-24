@@ -33,7 +33,7 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
       </p>
       <p>
         <span className={styles.title}>Document:</span>
-        <a className={styles.link} target="_blank" href={url}>
+        <a className={styles.link} target="_blank" rel="noreferrer" href={url}>
           {fileName}
         </a>
       </p>

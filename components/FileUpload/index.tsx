@@ -48,7 +48,11 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const uploadImage = useRef<HTMLImageElement>(null);
   const onUploadContainerClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    if (e.target == containerRef.current || e.target == textRef.current || e.target == uploadImage.current)
+    if (
+      e.target == containerRef.current ||
+      e.target == textRef.current ||
+      e.target == uploadImage.current
+    )
       fileInputRef.current!.click();
   };
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -158,6 +162,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 <motion.a
                   href={file.secure_url}
                   target="_blank"
+                  rel="noreferrer"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
@@ -172,7 +177,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       onClick={onClose}
-                      whileHover={{scale: 1.1}}
+                      whileHover={{ scale: 1.1 }}
                       style={{ position: "relative", top: 3 }}
                       src="/icons/close.svg"
                     />
