@@ -123,9 +123,8 @@ const Signup: NextPage = () => {
           setBackendError(error.response?.data?.message);
         else if (error?.response?.status == 500) {
           alert(error.response?.data?.message);
-        }
-        else {
-          alert("Please Check your Internet Connection 🥲")
+        } else {
+          alert("Please Check your Internet Connection 🥲");
         }
       } finally {
         setLoading(false);

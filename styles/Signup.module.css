@@ -1,6 +1,11 @@
 .main {
   overflow: hidden;
 }
+@media screen and (max-width: 1024px) {
+  .main {
+    padding-top: 60px;
+  }
+}
 
 .signupForm {
   padding: 0px 25px;
