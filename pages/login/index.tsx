@@ -60,7 +60,13 @@ const Signup: NextPage = () => {
         //   router.push("/application_form/application_fee");
         // } else {
         //   router.push("/application_form/contact_details");
-        router.push(`/application_form/${cookies.applicant.currentPage}`);
+        router.push(
+          `/application_form/${
+            cookies.applicant?.currentPage
+              ? cookies.applicant?.currentPage
+              : "contact_details"
+          }`
+        );
         // }
       } else {
         router.push("/payment_successful");
@@ -113,7 +119,9 @@ const Signup: NextPage = () => {
           //   noExperienceErrors
           // );
           router.push(
-            `application_form/${applicantData.applicant.currentPage}`
+            `application_form/${cookies.applicant?.currentPage
+              ? cookies.applicant?.currentPage
+              : "contact_details"}`
           );
         } else {
           router.push("/payment_successful");
