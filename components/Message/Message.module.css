@@ -1,0 +1,50 @@
+.messageContainer {
+  width: 100%;
+  padding: 5px 30px;
+  display: flex;
+}
+.adminMessageContainer {
+    justify-content: flex-end;
+}
+.profilePic {
+  width: 38px;
+  height: 38px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+}
+.messageDetails {
+  display: flex;
+  justify-content: space-between;
+}
+.name {
+  color: #64687c;
+  font-weight: bold;
+  font-size: 16px;
+  width: 23ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.time {
+  font-size: 14px;
+  color: #64687c;
+}
+.messageContent {
+  padding: 7px 10px;
+  border-radius: 8px;
+  width: 346px;
+  margin-top: 8px;
+}
+.innerContainer {
+  display: flex;
+  gap: 10px;
+}
+.applicantMessage {
+  background-color: #d9d9d9;
+  border-top-left-radius: 2px;
+}
+.adminMessage {
+    background-color: #7777d6;
+    color: white;
+    border-top-right-radius: 2px;
+}
