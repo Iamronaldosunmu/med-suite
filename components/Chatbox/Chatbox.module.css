@@ -1,0 +1,63 @@
+.chatboxContainer {
+  width: 100%;
+  border-top: 2px solid rgba(236, 235, 240, 1);
+  border-bottom: 2px solid rgba(236, 235, 240, 1);
+  padding: 20px 35px;
+  display: flex;
+  flex-direction: column;
+}
+.profileImageContainer {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.profileImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.chatBoxInfo {
+  width: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.chatBoxInfo div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.name {
+  font-weight: 500;
+  font-size: 18px;
+}
+.datetime {
+  color: #bababa;
+}
+.unreadCount {
+  background-color: #ff6b00;
+  width: 23px;
+  height: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding-bottom: 2px;
+  font-weight: bold;
+  color: white;
+}
+.chatBoxInfoContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    color: #BABABA;
+}
