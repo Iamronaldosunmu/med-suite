@@ -2,11 +2,12 @@ import styles from "./InfoMessage.module.css";
 
 interface InfoMessageProps {
   text: string;
+  small?: boolean;
 }
 
-const InfoMessage: React.FC<InfoMessageProps> = ({ text }) => {
+const InfoMessage: React.FC<InfoMessageProps> = ({ text, small }) => {
   return (
-    <div className={styles.container}>
+    <div style={small ? {padding: '8px 8px 4px'}: {}} className={styles.container}>
       <div>
         <img
           className={styles.exclamationIcon}
