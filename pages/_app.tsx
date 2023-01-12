@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import Router from "next/router";
 import { CookiesProvider } from "react-cookie";
 import UserContextProvider from "../components/Context/UserContext";
+import AdminContextProvider from "../components/Context/AdminContext";
 import ContactDetailsContextProvider from "../components/Context/ContactDetailsContext";
 import ContactDetails from "./application_form/contact_details";
 
@@ -29,13 +30,15 @@ Router.events.on("routeChangeStart", routeChange);
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <CookiesProvider>
-      <UserContextProvider>
-        <ContactDetailsContextProvider>
-          <AnimatePresence>
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
-        </ContactDetailsContextProvider>
-      </UserContextProvider>
+      <AdminContextProvider>
+        <UserContextProvider>
+          <ContactDetailsContextProvider>
+            <AnimatePresence>
+              <Component {...pageProps} key={router.route} />
+            </AnimatePresence>
+          </ContactDetailsContextProvider>
+        </UserContextProvider>
+      </AdminContextProvider>
     </CookiesProvider>
   );
 }
