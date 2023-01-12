@@ -1,0 +1,47 @@
+.container {
+  border: 1px solid #d0d7de;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.title {
+  color: #ff6b00;
+  margin-right: 11px;
+}
+.fieldName {
+  color: #d9d9d9;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.buttonContainer button {
+  width: 88px;
+  height: 27px;
+  font-size: 14px;
+  border: 0;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+.value {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  bottom: 2px;
+}
+.value .dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  padding: 0px !important;
+  border: 0;
+}
