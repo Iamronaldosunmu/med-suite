@@ -27,16 +27,29 @@ const ViewApplication = () => {
       setStreet(cookies.applicant?.contactDetails?.street);
       setCity(cookies.applicant?.contactDetails?.city);
       setState(cookies.applicant?.contactDetails?.state);
-      setImgSrc(cookies.applicant?.documents?.profilePic);
+      setImgSrc(cookies.applicant?.documents?.profilePicture);
       setApplicantId(cookies.user?.applicantId);
-      setDocuments(Object.values(cookies.applicant?.documents));
       setNursingExperience(cookies.applicant?.experience?.nursingExperience);
       setPostGraduateExperience(
         cookies.applicant?.experience?.postGraduateExperience
       );
-      setProofOfWork(cookies.applicant?.experience?.proofOfWork);
+      setProofOfWork({
+        ...cookies.applicant?.experience?.proofOfWork,
+        status: cookies.applicant?.doumentReviewStatuses["proofOfWork"],
+      });
+      const fields = Object.keys(cookies.applicant?.documents).filter(
+        (item) => item !== "_id"
+      );
+
+      setDocuments(
+        fields.map((fieldName) => ({
+          fieldName,
+          status: cookies.applicant?.doumentReviewStatuses[fieldName],
+          ...cookies.applicant?.documents[fieldName],
+        }))
+      );
     }
-  });
+  }, []);
 
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
@@ -47,15 +60,16 @@ const ViewApplication = () => {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [imgSrc, setImgSrc] = useState();
+  const [imgSrc, setImgSrc] = useState("");
   const [applicantId, setApplicantId] = useState("");
-  const [documents, setDocuments] = useState([]);
+  const [documents, setDocuments] = useState<string[]>([]);
   const [nursingExperience, setNursingExperience] = useState("");
   const [postGraduateExperience, setPostGraduateExperience] = useState("");
   const [proofOfWork, setProofOfWork] = useState({
     fileName: "",
     secure_url: "",
     public_id: "",
+    status: "",
   });
 
   const [activeNav, setActiveNav] = useState("contact");
@@ -154,10 +168,14 @@ const ViewApplication = () => {
           >
             {documents.map((item: any, index) => (
               <DocumentItem
+                documents={documents}
+                setDocuments={setDocuments}
                 key={index}
                 fileName={item.fileName}
+                fieldName={item.fieldName}
                 url={item.secure_url}
-                status="Being reviewed"
+                status={item.status}
+                public_id={item.public_id}
               />
             ))}
           </motion.section>
@@ -177,9 +195,13 @@ const ViewApplication = () => {
             </div>
             <p className={styles.smallHeader}>Proof Of Work</p>
             <DocumentItem
+              documents={documents}
+              setDocuments={setDocuments}
+              fieldName="proofOfWork"
               fileName={proofOfWork.fileName}
               url={proofOfWork.secure_url}
-              status="Being reviewed"
+              status={proofOfWork.status}
+              public_id={proofOfWork.public_id}
             />
           </motion.section>
         </motion.section>
