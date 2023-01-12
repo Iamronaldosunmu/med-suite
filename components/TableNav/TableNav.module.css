@@ -1,0 +1,27 @@
+.tableNavContainer {
+  margin-top: 37px;
+}
+.navItem {
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  color: #d5d5d9;
+  padding: 0px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.navItem.active {
+  color: #ff6b00;
+}
+.textContainer {
+  display: flex;
+}
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: #ecebf0;
+  margin-top: 6px;
+}
+.selectedLine {
+  height: 100%;
+  background-color: #ff6b00;
+}
