@@ -1,0 +1,113 @@
+.pageContainer {
+  display: grid;
+  grid-template-columns: 376px 1fr;
+  height: 100%;
+}
+.dashboardSection {
+  padding-top: 28px;
+  border-right: 2px solid rgba(236, 235, 240, 1);
+}
+.dashboardHeader {
+  padding: 0px 30px;
+  font-family: "Monda", sans-serif;
+  font-size: 24px;
+}
+.searchInputContainer {
+  padding: 0px 30px;
+  margin-top: 49px;
+}
+.messageSectionHeader {
+  width: 100%;
+  padding: 20px 29px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(236, 235, 240, 1);
+}
+.headerProfileImage {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.headerProfileImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recipientDetails {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+}
+
+.recipientName {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+.recipientId {
+  font-family: "Poppins", sans-serif;
+}
+.messageSection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.viewApplicationButton {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px 17px;
+  border-radius: 8px;
+  border: 0;
+  color: white;
+  background-color: #ff6b00;
+  cursor: pointer;
+}
+.messagesContainer {
+  width: 100%;
+  height: 100%;
+}
+.sendMessageContainer {
+  height: 110px;
+  width: 100%;
+  border-top: 2px solid rgba(236, 235, 240, 1);
+  padding: 25px;
+}
+.messageInputGroup {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  border: 2px solid rgba(236, 235, 240, 1);
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+.messageInput {
+  width: 100%;
+  font-size: 16px;
+  border: 0px;
+}
+.messageInput:focus {
+  outline: 0px;
+}
+.messageInput::placeholder {
+  font-size: 16px;
+}
+.messageButton {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 0;
+  color: white;
+  font-size: 18px;
+  background-color: #ff6b00;
+  font-weight: 600;
+}
+.chatSection {
+  margin-top: 26px;
+}
+.chatBox {
+  width: 100%;
+  border-top: 2px solid rgba(236, 235, 240, 1);
+}
