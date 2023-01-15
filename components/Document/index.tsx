@@ -69,7 +69,6 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
   const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
   const [file, setFile] = useState<DocumentProps>(defaultDocument);
 
-  console.log(cookies.applicant);
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     try {
@@ -97,22 +96,18 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
       let index = documentsCopy.findIndex(
         (document) => document.fieldName == fieldName
       );
-      console.log(index);
       documentsCopy[index] = {
         status: "Being Reviewed",
         fieldName,
         ...payload[fieldName],
       };
-      console.log(documentsCopy[index]);
       setDocuments(documentsCopy);
       const cookiesCopy = cookies.applicant;
       cookiesCopy.doumentReviewStatuses[fieldName] = "Being Reviewed";
       cookiesCopy.documents[fieldName] = payload[fieldName];
       setCookie("applicant", cookiesCopy);
 
-      console.log(response2);
     } catch (error: any) {
-      console.log(error);
       if (!error.response) alert("Please Check your Internet Connection🥲");
       else {
         alert(error.response?.data?.message);

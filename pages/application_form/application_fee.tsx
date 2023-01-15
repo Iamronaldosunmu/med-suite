@@ -16,7 +16,6 @@ const ApplicationFee = () => {
 
   useEffect(() => {
     if (!cookies.user || !cookies.applicant) router.push("/login");
-    console.log(cookies.user?.email);
   });
   const config = {
     email: cookies.user?.email,
@@ -34,7 +33,6 @@ const ApplicationFee = () => {
       setCookie("applicant", { ...cookies.applicant, paymentCompleted: true });
       router.replace("/payment_successful");
     } catch (error) {
-      console.log(error);
       alert(
         "Something went wrong... If your payment was successful, send us a message at medsuiteofficial@gmail.com"
       );

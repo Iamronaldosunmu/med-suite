@@ -24,7 +24,6 @@ const AdminContextProvider = ({ children }) => {
         setApplicantNumbers(data);
         setApplicantNumbersLoading(false);
       } catch (err) {
-          console.log(err)
         if (err.response.status == 500)
           alert("Something went wrong on the server 🥲");
         else {
@@ -38,9 +37,7 @@ const AdminContextProvider = ({ children }) => {
         try {
             const { data } = await client.get("/applicant");
             setApplicants(data.applicants);
-            console.log(data)
         } catch (err) {
-            console.log(err)
           if (err.response && err.response.status == 500)
             alert("Something went wrong on the server 🥲");
           else {

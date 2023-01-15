@@ -60,7 +60,6 @@ const Signup: NextPage = () => {
         const { data } = await client.post("/users/signup", payload);
         const { token } = data;
         const user: User = jwtDecode(token);
-        console.log(user);
         setUser(user);
         setCookie("user", user, {
           path: "/",

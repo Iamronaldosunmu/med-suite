@@ -102,22 +102,6 @@ const Signup: NextPage = () => {
           maxAge: 1800,
         });
         if (!applicantData.applicant.paymentCompleted) {
-          // const noContactDetailsErrors = Object.values(
-          //   validateContactDetailsInputs({
-          //     ...applicantData.applicant.contactDetails,
-          //   })
-          // ).every((value) => !Boolean(value));
-          // const noDocumentErrors = Object.values(
-          //   validateDocumentInputs({ ...applicantData.applicant.documents })
-          // ).every((value) => !Boolean(value));
-          // const noExperienceErrors = Object.values(
-          //   validateExperienceInputs({ ...applicantData.applicant.experience })
-          // ).every((value) => !Boolean(value));
-          // console.log(
-          //   noContactDetailsErrors,
-          //   noDocumentErrors,
-          //   noExperienceErrors
-          // );
           router.push(
             `application_form/${
               cookies.applicant?.currentPage

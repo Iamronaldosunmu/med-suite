@@ -11,7 +11,6 @@ export const validateTextField: any = (
   const schema = Joi.object({
     value: Joi.string().min(min).max(max).label(label).required(),
   });
-  console.log(schema.validate({ value }));
   return schema.validate({ value }).error?.details[0].message;
 };
 
@@ -30,7 +29,6 @@ export const validateEmailField: any = (
       .label(label)
       .required(),
   });
-  console.log(schema.validate({ value }));
   return schema.validate({ value }).error?.details[0].message;
 };
 

@@ -123,7 +123,6 @@ const Documents = () => {
         });
         router.push("/application_form/experience");
       } catch (error: any) {
-        console.log(error);
         if (!error.response) alert("Please Check your internet Connection.");
         else {
           alert(error.response?.data?.message);

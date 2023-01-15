@@ -14,7 +14,6 @@ interface ApplicantTableProps {
 
 const ApplicantTable: React.FC<ApplicantTableProps> = ({ data }) => {
   const { setApplicantInReview, applicants } = useContext(AdminContext);
-  console.log(data);
   return (
     <table className={styles.table}>
       <thead>

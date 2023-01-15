@@ -132,7 +132,6 @@ const ContactDetails = () => {
         await updateCookies();
         router.push("/application_form/documents");
       } catch (error: any) {
-        console.log(error);
         if (!error.response) alert("Please Check your internet Connection.");
         else {
           alert(error.response?.data?.message);
@@ -241,7 +240,6 @@ const ContactDetails = () => {
                 value={phoneNumber}
                 onChange={(phone) => {
                   setPhoneNumber(phone);
-                  console.log(phone);
                 }}
                 onBlur={() =>
                   setErrors({
@@ -300,7 +298,6 @@ const ContactDetails = () => {
               )}
               error={errors.countryOfOrigin}
               onBlur={() => {
-                console.log(countryOfOrigin);
                 setErrors({
                   ...errors,
                   countryOfOrigin: validateTextField(

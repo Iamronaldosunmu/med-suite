@@ -67,7 +67,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
         ...data,
         fileName: file.name,
       };
-      console.log(payload);
       const { data: backendData } = await client.patch(
         fieldName == "proofOfWork"
           ? `/applicant/experience/${cookies.user?.applicantId}/proofOfWork`
@@ -77,7 +76,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
       setFile(payload[fieldName]);
       if (onFileUpload) onFileUpload();
     } catch (error: any) {
-      console.log(error);
       if (!error.response) alert("Please Check your Internet Connection🥲");
       else {
         alert(error.response?.data?.message);

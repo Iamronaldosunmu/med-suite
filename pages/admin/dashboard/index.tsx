@@ -90,7 +90,7 @@ const Dashboard = () => {
               className={styles.viewApplication}
             >
               <button
-                onClick={() => console.log("This is working")}
+                onClick={}
                 disabled={
                   !Object.values(applicantInReview.doumentReviewStatuses)
                     .filter(
