@@ -33,7 +33,7 @@ const MessagePage = () => {
             </button>
           </div>
                   <div className={styles.messagesContainer}>
-                      <Message />
+                      {/* <Message /> */}
           </div>
           <div className={styles.sendMessageContainer}>
             <form className={styles.messageInputGroup}>
