@@ -87,7 +87,7 @@ const AdminDocumentItem: React.FC<AdminDocumentItemProps> = ({
         </p>
         {status !== "Accepted" && status !== "Rejected" && (
           <div className={styles.buttonContainer}>
-            <a href={url} target="_blank">
+            <a href={url} target="_blank" rel="noreferrer">
               <button style={{ backgroundColor: "#2744AB" }}>View</button>
             </a>
             <button
