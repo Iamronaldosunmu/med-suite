@@ -119,9 +119,11 @@ const Signup: NextPage = () => {
           //   noExperienceErrors
           // );
           router.push(
-            `application_form/${cookies.applicant?.currentPage
-              ? cookies.applicant?.currentPage
-              : "contact_details"}`
+            `application_form/${
+              cookies.applicant?.currentPage
+                ? cookies.applicant?.currentPage
+                : "contact_details"
+            }`
           );
         } else {
           router.push("/payment_successful");
@@ -229,6 +231,12 @@ const Signup: NextPage = () => {
                     )}
                   </AnimatePresence>
                 </button>
+                <p style={{ marginTop: 10 }} className={styles.navTitleSubText}>
+                  Forgot your password?
+                  <Link href={"/reset_password"}>
+                    <span> Reset It</span>
+                  </Link>
+                </p>
               </form>
             </div>
           </section>

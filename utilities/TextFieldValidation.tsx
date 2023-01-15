@@ -115,6 +115,34 @@ export const validateLoginInputs = (payload: LoginPayloadInput) => {
   return result;
 };
 
+interface ResetPasswordPayloadInput {
+  email: string;
+}
+
+export const validateResetPasswordEmail = (
+  payload: ResetPasswordPayloadInput
+) => {
+  const schema = Joi.object({
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: false } })
+      .min(3)
+      .max(50)
+      .label("Email")
+      .required(),
+  });
+
+  const validationResult = schema.validate(payload, { abortEarly: false });
+
+  const result = {
+    email: validationResult.error
+      ? validationResult.error.details.find((item) => item.path[0] == "email")
+          ?.message
+      : "",
+  };
+
+  return result;
+};
+
 interface ContactDetailsPayloadInput {
   firstName: string;
   middleName: string;
@@ -284,6 +312,43 @@ export const validateDocumentInputs = (payload: DocumentInput) => {
       ? ""
       : "'Profile Picture is not allowed to be empty",
   };
+
+  return result;
+};
+
+interface ResetPasswordInput {
+  password: string;
+  confirmPassword: string;
+}
+
+export const validateResetPasswordInputs = (payload: ResetPasswordInput) => {
+  const schema = Joi.object({
+
+    password: Joi.string().min(8).max(50).required().label("Password"),
+    confirmPassword: Joi.string()
+      .min(3)
+      .max(50)
+      .required()
+      .label("Confirm Password"),
+  });
+
+  const validationResult = schema.validate(payload, { abortEarly: false });
+
+  const result = {
+    password: validationResult.error
+      ? validationResult.error.details.find(
+          (item) => item.path[0] == "password"
+        )?.message
+      : "",
+    confirmPassword: validationResult.error
+      ? validationResult.error.details.find(
+          (item) => item.path[0] == "confirmPassword"
+        )?.message
+      : "",
+  };
+  const { password, confirmPassword } = payload;
+  if (!result.confirmPassword && password !== confirmPassword)
+    result.confirmPassword = "Passwords Must Match";
 
   return result;
 };
