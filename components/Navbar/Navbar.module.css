@@ -6,16 +6,39 @@
   padding: 12px 20px;
   position: fixed;
   top: 0;
-  background-color: white;
+  background-color: transparent;
   z-index: 10;
+  max-width: 1440px;
 }
 @media screen and (min-width: 1024px) {
   .navbarContainer {
-    padding: 33px 30px;
+    padding: 33px 30px 0px;
   }
 }
 @media screen and (min-width: 1280px) {
   .navbarContainer {
     padding: 33px 60px;
   }
+}
+
+.rightBoxContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.chatImage {
+  width: 30px;
+  height: 30px;
+}
+.chatButtonContainer {
+  position: relative;
+}
+.newMessagesDot {
+  width: 10px;
+  height: 10px;
+  background-color: #ff6b00;
+  border-radius: 100%;
+  position: absolute;
+  right: 0;
+  top: 3px;
 }
