@@ -1,14 +1,18 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import ContactDetailsItem from "../components/ContactDetailsItem";
-import Navbar from "../components/Navbar";
-import ViewApplicationButton from "../components/ViewApplicationButton";
-import styles from "../styles/ViewApplication.module.css";
-import ContactDetails from "./application_form/contact_details";
+import ContactDetailsItem from "../../components/ContactDetailsItem";
+import Navbar from "../../components/Navbar";
+import ViewApplicationButton from "../../components/ViewApplicationButton";
+import styles from "../../styles/ViewApplication.module.css";
+import ContactDetails from "../application_form/contact_details";
 import { motion } from "framer-motion";
-import DocumentItem from "../components/Document";
-import InfoMessage from "../components/InfoMessage";
+import DocumentItem from "../../components/Document";
+import InfoMessage from "../../components/InfoMessage";
+import navbarStyles from "../../components/Navbar/Navbar.module.css";
+import Logo from "../../components/Logo";
+import MobileNav from "../../components/MobileNav";
+import ChatButton from "../../components/ChatButton";
 
 const ViewApplication = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
@@ -75,7 +79,15 @@ const ViewApplication = () => {
   const [activeNav, setActiveNav] = useState("contact");
   return (
     <main className={styles.mainContainer}>
-      <Navbar />
+      {/* <Navbar /> */}
+      <nav className={navbarStyles.navbarContainer}>
+        <Logo />
+        <div className={navbarStyles.rightBoxContainer}>
+          <ChatButton />
+          {/*  */}
+          <MobileNav />
+        </div>
+      </nav>
       <div className={styles.infoMessagesContainer}>
         <InfoMessage
           text={
