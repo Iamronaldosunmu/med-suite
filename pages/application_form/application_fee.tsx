@@ -19,7 +19,7 @@ const ApplicationFee = () => {
   });
   const config = {
     email: cookies.user?.email,
-    amount: 1500000,
+    amount: 3000000,
     publicKey: process.env.NEXT_PUBLIC_PS_PUBLIC_KEY!,
   };
   const handlePaystackCloseAction = () => {
@@ -43,7 +43,7 @@ const ApplicationFee = () => {
   };
   const componentProps = {
     ...config,
-    text: "Pay NGN 15,000",
+    text: "Pay NGN 30,000",
     onSuccess: handlePaystackSuccessAction,
     onClose: handlePaystackCloseAction,
   };
