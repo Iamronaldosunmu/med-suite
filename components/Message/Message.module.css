@@ -6,6 +6,7 @@
 .adminMessageContainer {
     justify-content: flex-end;
 }
+
 .profilePic {
   width: 38px;
   height: 38px;
@@ -32,19 +33,22 @@
 .messageContent {
   padding: 7px 10px;
   border-radius: 8px;
-  width: 346px;
+  
+  max-width: 346px;
   margin-top: 8px;
+  background-color: #d9d9d9;
 }
 .innerContainer {
   display: flex;
   gap: 10px;
 }
 .applicantMessage {
-  background-color: #d9d9d9;
+  /* background-color: #7777d6; */
+  /* background-color: #d9d9d9; */
   border-top-left-radius: 2px;
 }
 .adminMessage {
-    background-color: #7777d6;
     color: white;
     border-top-right-radius: 2px;
+  background-color: #ff6b00;
 }

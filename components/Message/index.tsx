@@ -1,26 +1,50 @@
 import styles from "./Message.module.css";
+import { motion } from "framer-motion";
 
 interface MessageProps {
-  from: { name: string; profilePic: string };
-  to: { name: string; profilePic: string };
+  layoutId: number;
+  from: string;
+  name: string;
+  content: string;
+  createdAt?: string;
+  profilePic?: string;
+  adminSide?: boolean;
 }
 
-const Message: React.FC<MessageProps> = ({ from, to }) => {
+const Message: React.FC<MessageProps> = ({
+  from,
+  profilePic,
+  name,
+  createdAt,
+  content,
+  layoutId,
+}) => {
   return (
-    <div className={`${styles.messageContainer} ${styles.adminMessageContainer}`}>
+    <motion.div
+      layoutId={layoutId.toString()}
+      initial={{opacity: 0, y: 10, scale: 0.95}}
+      animate={{opacity: 1, y: 0, scale: 1}}
+      className={`${styles.messageContainer} ${
+        from == "applicant" ? styles.adminMessageContainer : ""
+      }`}
+    >
       <div className={styles.innerContainer}>
-        {from?.profilePic && <div className={styles.profilePic}></div>}
+        {profilePic && <div className={styles.profilePic}></div>}
         <div>
           <div className={styles.messageDetails}>
-            <p className={styles.name}>Dosunmu Ronald SSSSSSSSSSSSSSSS</p>
-            <p className={styles.time}>Thursday 11:40 AM</p>
+            <p className={styles.name}>{name}</p>
+            <p className={styles.time}>{createdAt}</p>
           </div>
-          <div className={`${styles.messageContent} ${styles.adminMessage}`}>
-            I will upload the documents before the end of the day
+          <div
+            className={`${styles.messageContent} ${
+              from == "applicant" ? styles.adminMessage : ""
+            }`}
+          >
+            {content}
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
