@@ -1,0 +1,67 @@
+.messagesNav {
+  width: 100%;
+  height: 70px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  box-shadow: -10px 0px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0px;
+  z-index: 10;
+  background-color: white;
+}
+
+.backButton {
+  cursor: pointer;
+}
+.backIcon {
+  width: 30px;
+}
+.navText {
+  font-size: 20px;
+  font-weight: bold;
+}
+.messagesContainer {
+  padding-top: 90px;
+  padding-bottom: 120px;
+}
+.sendMessageContainer {
+    background-color: white;
+  height: 90px;
+  width: 100%;
+  border-top: 2px solid rgba(236, 235, 240, 1);
+  padding: 15px;
+  position: fixed;
+  bottom: 0px
+}
+.messageInputGroup {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  border: 2px solid rgba(236, 235, 240, 1);
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+.messageInput {
+  width: 100%;
+  font-size: 16px;
+  border: 0px;
+}
+.messageInput:focus {
+  outline: 0px;
+}
+.messageInput::placeholder {
+  font-size: 16px;
+}
+.messageButton {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 0;
+  color: white;
+  font-size: 18px;
+  background-color: #ff6b00;
+  font-weight: 600;
+}
