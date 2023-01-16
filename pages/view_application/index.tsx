@@ -31,7 +31,7 @@ const ViewApplication = () => {
       setStreet(cookies.applicant?.contactDetails?.street);
       setCity(cookies.applicant?.contactDetails?.city);
       setState(cookies.applicant?.contactDetails?.state);
-      setImgSrc(cookies.applicant?.documents?.profilePicture);
+      setImgSrc(cookies.applicant?.documents?.profilePicture?.secure_url);
       setApplicantId(cookies.user?.applicantId);
       setNursingExperience(cookies.applicant?.experience?.nursingExperience);
       setPostGraduateExperience(
@@ -54,7 +54,7 @@ const ViewApplication = () => {
       );
     }
   }, []);
-
+  
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");

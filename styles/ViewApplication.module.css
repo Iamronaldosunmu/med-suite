@@ -23,8 +23,8 @@
 }
 
 .profilePicContainer {
-  min-width: 61px;
-  min-height: 61px;
+  width: 61px;
+  height: 61px;
   border-radius: 50%;
   background-color: grey;
   overflow: hidden;
