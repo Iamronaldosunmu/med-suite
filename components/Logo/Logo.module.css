@@ -21,11 +21,11 @@
     white-space: nowrap;
 }
 @media screen and (min-width: 1024px) {
-    .logoContainer {
+    /* .logoContainer {
         width: 81.89px;
         height: 71px;
-    }
-    .logoText {
+    } */
+    /* .logoText {
         font-size: 36px;
-    }
+    } */
 }
