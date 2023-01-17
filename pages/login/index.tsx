@@ -103,11 +103,7 @@ const Signup: NextPage = () => {
         });
         if (!applicantData.applicant.paymentCompleted) {
           console.log(
-            `application_form/${
-              cookies.applicant?.currentPage
-                ? cookies.applicant?.currentPage
-                : "contact_details"
-            }`
+            cookies.applicant?.currentPage
           );
           router.push(
             `application_form/${
