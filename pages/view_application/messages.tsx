@@ -7,7 +7,6 @@ import styles from "../../styles/UserMessages.module.css";
 import client from "../api/Services/AxiosClient";
 import Loader from "../../components/Lottie/loader.json";
 import { date } from "joi";
-import ScrollToBottom from "react-scroll-to-bottom";
 
 const Messages = () => {
   const router = useRouter();
