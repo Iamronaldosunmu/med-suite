@@ -102,6 +102,13 @@ const Signup: NextPage = () => {
           maxAge: 1800,
         });
         if (!applicantData.applicant.paymentCompleted) {
+          console.log(
+            `application_form/${
+              cookies.applicant?.currentPage
+                ? cookies.applicant?.currentPage
+                : "contact_details"
+            }`
+          );
           router.push(
             `application_form/${
               cookies.applicant?.currentPage
