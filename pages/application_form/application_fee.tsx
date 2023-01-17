@@ -19,7 +19,7 @@ const ApplicationFee = () => {
   });
   const config = {
     email: cookies.user?.email,
-    amount: 3000000,
+    amount: 100000,
     publicKey: process.env.NEXT_PUBLIC_PS_PUBLIC_KEY!,
   };
   const handlePaystackCloseAction = () => {
@@ -43,7 +43,7 @@ const ApplicationFee = () => {
   };
   const componentProps = {
     ...config,
-    text: "Pay NGN 30,000",
+    text: "Pay NGN 1,000",
     onSuccess: handlePaystackSuccessAction,
     onClose: handlePaystackCloseAction,
   };
@@ -68,9 +68,7 @@ const ApplicationFee = () => {
           <div
             className={`${buttonStyles.button} ${buttonStyles.paystackButtonContainer}`}
           >
-            <PaystackButton
-              {...componentProps}
-            />
+            <PaystackButton {...componentProps} />
           </div>
           <Button
             onClick={() => router.push("/application_form/experience")}
