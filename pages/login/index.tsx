@@ -101,14 +101,14 @@ const Signup: NextPage = () => {
           path: "/",
           maxAge: 1800,
         });
+        console.log(
+          applicantData.applicant.currentPage
+        );
         if (!applicantData.applicant.paymentCompleted) {
-          console.log(
-            cookies.applicant?.currentPage
-          );
           router.push(
             `application_form/${
-              cookies.applicant?.currentPage
-                ? cookies.applicant?.currentPage
+              applicantData.applicant.currentPage
+                ? applicantData.applicant.currentPage
                 : "contact_details"
             }`
           );
