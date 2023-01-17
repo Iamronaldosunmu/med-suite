@@ -23,7 +23,7 @@ const PaymentSuccessful = () => {
           <button onClick={() => router.push("/view_application")}>
             View Application
           </button>
-          <button>Go Home</button>
+          <button onClick={() => router.push("/")}>Go Home</button>
         </div>
       </section>
     </main>
