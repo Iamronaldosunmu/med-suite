@@ -19,7 +19,7 @@ const ContactUsModal: React.FC<ContactUsModalProps> = ({ setShowing }) => {
         <motion.div
           initial={{ opacity: 0.8, scale: 0.95, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0}}
+          exit={{ opacity: 0 }}
           onClick={(e: any) => e.stopPropagation()}
           className={styles.modalContainer}
         >
