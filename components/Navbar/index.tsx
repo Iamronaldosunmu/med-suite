@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import ChatButton from "../ChatButton";
 import ContactUsModal from "../ContactUsModal";
@@ -17,15 +17,23 @@ const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
   const [contactModalShowing, setContactModalShowing] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    if (cookies?.user) {
+      setIsLoggedIn(true);
+    }
+  });
   return (
     <>
       <nav className={styles.navbarContainer}>
         <Logo />
         <div className={styles.rightBoxContainer}>
-          {hasMessageButton && <div className={styles.mobileChatButton}>
-            <ChatButton />
-          </div>}
+          {hasMessageButton && (
+            <div className={styles.mobileChatButton}>
+              <ChatButton />
+            </div>
+          )}
           <MobileNav
             mobileNavIsOpen={mobileNavIsOpen}
             setMobileNavIsOpen={setMobileNavIsOpen}
@@ -48,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
         >
           Home
         </p>
-        {cookies?.applicant && (
+        {isLoggedIn && (
           <p
             onClick={() => {
               removeCookie("applicant");
