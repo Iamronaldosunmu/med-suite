@@ -5,7 +5,7 @@ const ChatButton = () => {
     const router = useRouter();
     return (
         <div onClick={() => router.push("/view_application/messages")} className={navbarStyles.chatButtonContainer}> 
-            <div className={navbarStyles.newMessagesDot}></div>
+            {/* <div className={navbarStyles.newMessagesDot}></div> */}
             <img className={navbarStyles.chatImage} src="/icons/chat.svg" />
         </div>
     );
