@@ -6,13 +6,15 @@ import Navbar from "../../components/Navbar";
 import ViewApplicationButton from "../../components/ViewApplicationButton";
 import styles from "../../styles/ViewApplication.module.css";
 import ContactDetails from "../application_form/contact_details";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import DocumentItem from "../../components/Document";
 import InfoMessage from "../../components/InfoMessage";
 import navbarStyles from "../../components/Navbar/Navbar.module.css";
 import Logo from "../../components/Logo";
 import MobileNav from "../../components/MobileNav";
 import ChatButton from "../../components/ChatButton";
+import DesktopNav from "../../components/DesktopNav";
+import ContactUsModal from "../../components/ContactUsModal";
 
 const ViewApplication = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
@@ -77,17 +79,12 @@ const ViewApplication = () => {
   });
 
   const [activeNav, setActiveNav] = useState("contact");
+  const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false);
+  const [contactModalShowing, setContactModalShowing] = useState(false);
   return (
     <main className={styles.mainContainer}>
       {/* <Navbar /> */}
-      <nav className={navbarStyles.navbarContainer}>
-        <Logo />
-        <div className={navbarStyles.rightBoxContainer}>
-          <ChatButton />
-          {/*  */}
-          <MobileNav />
-        </div>
-      </nav>
+      <Navbar hasMessageButton/>
       <div className={styles.infoMessagesContainer}>
         <InfoMessage
           text={
