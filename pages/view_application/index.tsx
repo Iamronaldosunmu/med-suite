@@ -21,6 +21,7 @@ const ViewApplication = () => {
   const router = useRouter();
 
   useEffect(() => {
+    console.log(cookies);
     if (!cookies.user || !cookies.applicant) {
       router.push("/login");
     } else {
