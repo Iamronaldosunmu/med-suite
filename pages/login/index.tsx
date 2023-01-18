@@ -96,12 +96,16 @@ const Signup: NextPage = () => {
           path: "/",
           maxAge: 1800,
         });
-        console.log(applicantData);
+        localStorage.setItem(
+          "applicant",
+          JSON.stringify(applicantData.applicant)
+        );
         setUser(user);
         setCookie("user", user, {
           path: "/",
           maxAge: 1800,
         });
+        localStorage.setItem("user", JSON.stringify(user))
         console.log(applicantData.applicant.currentPage);
         if (!applicantData.applicant.paymentCompleted) {
           router.push(
