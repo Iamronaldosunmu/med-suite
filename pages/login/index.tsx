@@ -96,14 +96,13 @@ const Signup: NextPage = () => {
           path: "/",
           maxAge: 1800,
         });
+        console.log(applicantData);
         setUser(user);
         setCookie("user", user, {
           path: "/",
           maxAge: 1800,
         });
-        console.log(
-          applicantData.applicant.currentPage
-        );
+        console.log(applicantData.applicant.currentPage);
         if (!applicantData.applicant.paymentCompleted) {
           router.push(
             `application_form/${
