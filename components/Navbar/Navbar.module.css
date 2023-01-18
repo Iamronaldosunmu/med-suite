@@ -66,4 +66,7 @@
   .navItemsContainer {
     display: none;
   }
+  .mobileChatButton {
+    display: none;
+  }
 }

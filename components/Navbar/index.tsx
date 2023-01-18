@@ -1,6 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import ChatButton from "../ChatButton";
 import ContactUsModal from "../ContactUsModal";
 import DesktopNav from "../DesktopNav";
@@ -14,6 +15,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
   const [contactModalShowing, setContactModalShowing] = useState(false);
   const router = useRouter();
   return (
@@ -21,14 +23,18 @@ const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
       <nav className={styles.navbarContainer}>
         <Logo />
         <div className={styles.rightBoxContainer}>
-          {hasMessageButton && <ChatButton />}
-        <MobileNav
-          mobileNavIsOpen={mobileNavIsOpen}
-          setMobileNavIsOpen={setMobileNavIsOpen}
-        />
-
+          {hasMessageButton && <div className={styles.mobileChatButton}>
+            <ChatButton />
+          </div>}
+          <MobileNav
+            mobileNavIsOpen={mobileNavIsOpen}
+            setMobileNavIsOpen={setMobileNavIsOpen}
+          />
         </div>
-        <DesktopNav hasMessageButton={hasMessageButton} setContactModalShowing={setContactModalShowing} />
+        <DesktopNav
+          hasMessageButton={hasMessageButton}
+          setContactModalShowing={setContactModalShowing}
+        />
       </nav>
       <div
         style={{ maxHeight: mobileNavIsOpen ? 120 : 0 }}
@@ -42,6 +48,18 @@ const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
         >
           Home
         </p>
+        {cookies?.applicant && (
+          <p
+            onClick={() => {
+              removeCookie("applicant");
+              removeCookie("user");
+              router.push("/login");
+              setMobileNavIsOpen(false);
+            }}
+          >
+            Logout
+          </p>
+        )}
         <p onClick={() => router.push("/login")}>Login</p>
         <p
           onClick={() => {
