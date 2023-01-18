@@ -54,7 +54,7 @@ const Messages = () => {
     <main>
       <nav className={styles.messagesNav}>
         <figure onClick={() => router.back()} className={styles.backButton}>
-          <img className={styles.backIcon} src="/icons/backarrowIcon.svg" />
+          <img className={styles.backIcon} src="/icons/backarrowicon.svg" />
         </figure>
         <p className={styles.navText}>Admin</p>
       </nav>
