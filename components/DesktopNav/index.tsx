@@ -1,15 +1,30 @@
 import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
+import ChatButton from "../ChatButton";
 import styles from "./DesktopNav.module.css";
 
-const DesktopNav = () => {
+interface DesktopNavProps {
+  setContactModalShowing: Dispatch<SetStateAction<boolean>>;
+  hasMessageButton?: boolean;
+}
+
+const DesktopNav: React.FC<DesktopNavProps> = ({
+  setContactModalShowing,
+  hasMessageButton,
+}) => {
   return (
     <div className={styles.desktopnavContainer}>
+      {hasMessageButton && <ChatButton />}
       <Link href="/login">
         <p className={styles.navText}>Log In</p>
       </Link>
-      <Link href="/contact-us">
-        <p className={styles.navText}>Contact us</p>
-      </Link>
+
+      <p
+        onClick={() => setContactModalShowing(true)}
+        className={styles.navText}
+      >
+        Contact us
+      </p>
     </div>
   );
 };
