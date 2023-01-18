@@ -26,9 +26,9 @@ const ContactUsModal: React.FC<ContactUsModalProps> = ({ setShowing }) => {
           <img className={styles.contactIcon} src="/icons/contactUsIcon.svg" />
           <h1 className={styles.header}>Get in touch!</h1>
           <p className={styles.text}>
-            Thanks for visiting our website and hopefully applying to MedSuite.
+            {`Thanks for visiting our website and hopefully applying to MedSuite.
             Let us know if you're having any issues and we'll get back to you as
-            soon as we can.
+            soon as we can.`}
           </p>
           <motion.a
             whileFocus={{ scale: 0.95 }}
