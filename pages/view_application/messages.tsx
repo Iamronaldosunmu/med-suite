@@ -17,11 +17,13 @@ const Messages = () => {
   const bottom = useRef<HTMLDivElement>(null);
 
   const fetchMessages = async () => {
+    console.log(cookies.applicant?._id)
     try {
       const { data } = await client.get(`/messages/${cookies.applicant?._id}`);
       console.log(data);
       setMessages(data.messages);
     } catch (err) {
+      console.log(err)
       alert("Could not fetch data!");
     }
   };
