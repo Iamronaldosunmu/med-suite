@@ -19,45 +19,83 @@ import ContactUsModal from "../../components/ContactUsModal";
 const ViewApplication = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
   const router = useRouter();
+  const [applicant, setApplicant] = useState<any>({});
+  const [clientLoaded, setClientLoaded] = useState(false);
 
   useEffect(() => {
-    console.log(cookies);
-    if (!cookies.user || !cookies.applicant) {
+    setClientLoaded(true);
+    if (!cookies.user) {
       router.push("/login");
     } else {
-      setFirstName(cookies.applicant?.contactDetails?.firstName);
-      setLastName(cookies.applicant?.contactDetails?.lastName);
-      setMiddleName(cookies.applicant?.contactDetails?.middleName);
-      setPhoneNumber(cookies.applicant?.contactDetails?.phoneNumber);
-      setStateOfOrigin(cookies.applicant?.contactDetails?.stateOfOrigin);
-      setCountryOfOrigin(cookies.applicant?.contactDetails?.countryOfOrigin);
-      setStreet(cookies.applicant?.contactDetails?.street);
-      setCity(cookies.applicant?.contactDetails?.city);
-      setState(cookies.applicant?.contactDetails?.state);
-      setImgSrc(cookies.applicant?.documents?.profilePicture?.secure_url);
+      if (clientLoaded) {
+        setApplicant(JSON.parse(localStorage.getItem("applicant")!)), 500;
+        setFirstName(
+          JSON.parse(localStorage.getItem("applicant")!).contactDetails
+            ?.firstName
+        );
+      }
+
+      setLastName(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails?.lastName
+      );
+      setMiddleName(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails
+          ?.middleName
+      );
+      setPhoneNumber(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails
+          ?.phoneNumber
+      );
+      setStateOfOrigin(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails
+          ?.stateOfOrigin
+      );
+      setCountryOfOrigin(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails
+          ?.countryOfOrigin
+      );
+      setStreet(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails?.street
+      );
+      setCity(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails?.city
+      );
+      setState(
+        JSON.parse(localStorage.getItem("applicant")!).contactDetails?.state
+      );
+      setImgSrc(
+        JSON.parse(localStorage.getItem("applicant")!).documents?.profilePicture
+          ?.secure_url
+      );
       setApplicantId(cookies.user?.applicantId);
-      setNursingExperience(cookies.applicant?.experience?.nursingExperience);
+      setNursingExperience(
+        JSON.parse(localStorage.getItem("applicant")!).experience
+          ?.nursingExperience
+      );
       setPostGraduateExperience(
-        cookies.applicant?.experience?.postGraduateExperience
+        JSON.parse(localStorage.getItem("applicant")!).experience
+          ?.postGraduateExperience
       );
       setProofOfWork({
-        ...cookies.applicant?.experience?.proofOfWork,
-        status: cookies.applicant?.doumentReviewStatuses["proofOfWork"],
+        ...JSON.parse(localStorage.getItem("applicant")!).experience
+          ?.proofOfWork,
+        status: JSON.parse(localStorage.getItem("applicant")!)
+          .doumentReviewStatuses?.proofOfWork,
       });
-      const fields = Object.keys(cookies.applicant?.documents).filter(
+      const fields = Object.keys(JSON.parse(localStorage.getItem("applicant")!).documents).filter(
         (item) => item !== "_id"
       );
 
       setDocuments(
         fields.map((fieldName) => ({
           fieldName,
-          status: cookies.applicant?.doumentReviewStatuses[fieldName],
-          ...cookies.applicant?.documents[fieldName],
+          status: JSON.parse(localStorage.getItem("applicant")!).doumentReviewStatuses[fieldName],
+          ...JSON.parse(localStorage.getItem("applicant")!).documents[fieldName],
         }))
       );
     }
-  }, []);
-  
+  }, [clientLoaded]);
+
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -85,7 +123,7 @@ const ViewApplication = () => {
   return (
     <main className={styles.mainContainer}>
       {/* <Navbar /> */}
-      <Navbar hasMessageButton/>
+      <Navbar hasMessageButton />
       <div className={styles.infoMessagesContainer}>
         <InfoMessage
           text={
