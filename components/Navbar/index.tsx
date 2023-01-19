@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   useEffect(() => {
-    if (cookies?.user) {
+    if (cookies.user) {
       setIsLoggedIn(true);
     }
   });
@@ -61,6 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
             onClick={() => {
               removeCookie("applicant");
               removeCookie("user");
+              localStorage?.clear();
               router.push("/login");
               setMobileNavIsOpen(false);
             }}
@@ -68,7 +69,7 @@ const Navbar: React.FC<NavbarProps> = ({ hasMessageButton }) => {
             Logout
           </p>
         )}
-        <p onClick={() => router.push("/login")}>Login</p>
+        {!isLoggedIn && <p onClick={() => router.push("/login")}>Login</p>}
         <p
           onClick={() => {
             setMobileNavIsOpen(false);
