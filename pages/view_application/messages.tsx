@@ -28,7 +28,7 @@ const Messages = () => {
     }
   };
   useEffect(() => {
-    if (!cookies?.applicant) router.replace("/login");
+    if (!cookies?.user) router.replace("/login");
     fetchMessages();
   }, []);
 
