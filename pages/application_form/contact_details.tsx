@@ -84,6 +84,7 @@ const ContactDetails = () => {
       `/applicant/${cookies.user.applicantId}`
     );
     setCookie("applicant", applicantData.applicant);
+    localStorage?.set("applicant", applicantData.applicant);
   };
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
