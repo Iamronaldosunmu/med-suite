@@ -17,9 +17,9 @@ const Messages = () => {
   const bottom = useRef<HTMLDivElement>(null);
 
   const fetchMessages = async () => {
-    console.log(cookies.applicant?._id)
+    console.log(cookies.user.applicantId)
     try {
-      const { data } = await client.get(`/messages/${cookies.applicant?._id}`);
+      const { data } = await client.get(`/messages/${cookies.user.applicantId}`);
       console.log(data);
       setMessages(data.messages);
     } catch (err) {
@@ -38,7 +38,7 @@ const Messages = () => {
         setLoading(true);
         const payload = { content: messageContent, from: "applicant" };
         const { data } = await client.post(
-          `/messages/send_message/${cookies.applicant?._id}`,
+          `/messages/send_message/${cookies.user.applicantId}`,
           payload
         );
         console.log(data);
