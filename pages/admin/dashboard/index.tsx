@@ -78,7 +78,7 @@ const Dashboard = () => {
                   lastName: applicant.contactDetails.lastName,
                   email: applicant.user.email,
                   _id: applicant._id,
-                  profilePicUrl: applicant.documents.profilePicture.secure_url,
+                  profilePicUrl: applicant.documents.profilePicture?.secure_url,
                 };
               })}
             />
@@ -122,7 +122,7 @@ const Dashboard = () => {
                 >
                   <img
                     className={applicationStyles.profilePic}
-                    src={applicantInReview.documents.profilePicture.secure_url}
+                    src={applicantInReview.documents.profilePicture?.secure_url}
                   />
                 </div>
                 <div className={`${applicationStyles.textContainer} `}>
@@ -279,7 +279,7 @@ const Dashboard = () => {
                       status={
                         applicantInReview.doumentReviewStatuses.proofOfWork
                       }
-                      url={applicantInReview?.experience.secure_url}
+                      url={applicantInReview?.experience?.secure_url}
                       fieldName={"proofOfWork"}
                     />
                   </div>
