@@ -9,18 +9,20 @@ interface NavItemProps {
 }
 const NavItem: React.FC<NavItemProps> = ({ active, text, setSelectedNav }) => {
   return (
-    <p
+    <motion.p
+    whileHover={{scale: 1.04}}
       onClick={() => setSelectedNav(text)}
       className={`${styles.navItem} ${active ? styles.active : ""}`}
     >
       {text}
-    </p>
+    </motion.p>
   );
 };
 
 const allApplicants = { width: 138, left: 0 };
 const inReview = { width: 105, x: 139 };
-const submitted = { width: 105, x: 247 };
+const approvedForInterview = { width: 211, x: 247 }
+const submitted = { width: 105, x: 465 };
 
 interface TableNavProps {
   selectedNav: string;
@@ -42,6 +44,11 @@ const TableNav: React.FC<TableNavProps> = ({ selectedNav, setSelectedNav }) => {
           setSelectedNav={setSelectedNav}
         />
         <NavItem
+          text="Approved For Interview"
+          active={selectedNav == "Approved For Interview"}
+          setSelectedNav={setSelectedNav}
+        />
+        <NavItem
           text="Submitted"
           active={selectedNav == "Submitted"}
           setSelectedNav={setSelectedNav}
@@ -54,7 +61,7 @@ const TableNav: React.FC<TableNavProps> = ({ selectedNav, setSelectedNav }) => {
               ? allApplicants
               : selectedNav == "In Review"
               ? inReview
-              : submitted
+              : (selectedNav == "Approved For Interview" ? approvedForInterview : submitted)
           }
                   transition={{duration: 0.2, ease: "easeIn"}}
           className={styles.selectedLine}
