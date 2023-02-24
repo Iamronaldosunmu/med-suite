@@ -15,15 +15,18 @@ const Messages = () => {
   const [messageContent, setMessageContent] = useState("");
   const [loading, setLoading] = useState(false);
   const bottom = useRef<HTMLDivElement>(null);
+  const messagesContainer = useRef<HTMLDivElement>(null);
 
   const fetchMessages = async () => {
-    console.log(cookies.user.applicantId)
+    console.log(cookies.user.applicantId);
     try {
-      const { data } = await client.get(`/messages/${cookies.user.applicantId}`);
-      console.log(data);
+      const { data } = await client.get(
+        `/messages/${cookies?.user?.applicantId}`
+      );
+
       setMessages(data.messages);
     } catch (err) {
-      console.log(err)
+      console.log(err);
       alert("Could not fetch data!");
     }
   };
@@ -38,13 +41,17 @@ const Messages = () => {
         setLoading(true);
         const payload = { content: messageContent, from: "applicant" };
         const { data } = await client.post(
-          `/messages/send_message/${cookies.user.applicantId}`,
+          `/messages/send_message/${cookies?.user?.applicantId}`,
           payload
         );
         console.log(data);
         fetchMessages();
+        console.log(messagesContainer);
+        messagesContainer.current?.scroll({
+          behavior: "smooth",
+          top: messagesContainer.current.scrollHeight,
+        });
         setMessageContent("");
-        bottom.current?.scrollIntoView();
       } catch (error) {
         alert("Something went wrong while sending the message!");
       } finally {
@@ -60,9 +67,10 @@ const Messages = () => {
         </figure>
         <p className={styles.navText}>Admin</p>
       </nav>
-      <section className={styles.messagesContainer}>
+      <section ref={messagesContainer} className={styles.messagesContainer}>
         {messages.map((message: any, index) => (
           <Message
+            createdAt={message.createdAt}
             key={index}
             layoutId={index}
             from={message.from}

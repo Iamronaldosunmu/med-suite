@@ -1,6 +1,6 @@
 .pageContainer {
   display: grid;
-  grid-template-columns: 376px 1fr;
+  grid-template-columns: 390px 1fr;
   height: 100%;
 }
 .dashboardSection {
@@ -65,7 +65,11 @@
 }
 .messagesContainer {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 208.4px);
+  padding-top: 20px;
+  padding-bottom: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .sendMessageContainer {
   height: 110px;
@@ -103,11 +107,33 @@
   font-size: 18px;
   background-color: #ff6b00;
   font-weight: 600;
+  width: 91.71px;
+  height: 35.2px;
+  cursor: pointer;
 }
-.chatSection {
-  margin-top: 26px;
-}
+
 .chatBox {
   width: 100%;
   border-top: 2px solid rgba(236, 235, 240, 1);
+}
+.searchInputSection {
+  padding-bottom: 26px;
+  border-bottom: 2px solid rgba(236, 235, 240, 1);
+
+}
+
+.chatSection {
+  height: calc(100vh - 185px);
+  overflow-y: scroll;
+}
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preview div {
+  background-color: #ff6b00;
+  padding:  6px 12px 8px;
+  border-radius: 18px;
+  color: white;
 }
