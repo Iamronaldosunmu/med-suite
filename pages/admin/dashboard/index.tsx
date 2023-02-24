@@ -10,15 +10,27 @@ import TableNav from "../../../components/TableNav";
 import ViewApplicationButton from "../../../components/ViewApplicationButton";
 import styles from "../../../styles/DashboardStyles.module.css";
 import applicationStyles from "../../../styles/ViewApplication.module.css";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import AdminDocumentItem from "../../../components/AdminDocumentItem";
 import { AdminContext } from "../../../components/Context/AdminContext";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/router";
+import RejectDocument from "../../../components/RejectDocumentModal";
+import { useCookies } from "react-cookie";
+import client from "../../api/Services/AxiosClient";
 
 const Dashboard = () => {
   const [selectedNav, setSelectedNav] = useState("All Applicants");
   const [activeNav, setActiveNav] = useState("contact");
+  const [searchValue, setSearchValue] = useState("");
+  const [sortOption, setSortOption] = useState(0);
+  const [cookies, setCookie, removeCookie] = useCookies(["admin"]);
+
   const documents: any[] = [];
+  const router = useRouter();
+  const { applicantId } = router.query;
+
+
 
   const {
     applicantNumbers,
@@ -27,6 +39,9 @@ const Dashboard = () => {
     fetchAllApplicants,
     applicants,
     applicantInReview,
+    setApplicantInReview,
+    rejectDocumentShowing,
+    setRejectDocumentShowing,
   } = useContext(AdminContext);
 
   useEffect(() => {
@@ -34,8 +49,47 @@ const Dashboard = () => {
     fetchAllApplicants();
   }, []);
 
+  useEffect(() => {
+    if (!router.isReady) return;
+    console.log(applicants.find((item: any) => item._id == applicantId));
+    setApplicantInReview(
+      applicants.find((item: any) => item._id == applicantId)
+    );
+  }, [router.isReady]);
+
+  const toggleSortOption = () => {
+    if (sortOption < 2) {
+      setSortOption(sortOption + 1);
+    } else {
+      setSortOption(0);
+    }
+  };
+
+  useEffect(() => {
+    if (!cookies.admin) router.push("/admin");
+  });
+
+  const onAproveApplicant = async () => {
+    console.log("This Button Is Working!");
+
+    try {
+      const { data } = await client.post(`/applicant/approve_applicant/${applicantInReview._id}`);
+      fetchAllApplicants();
+      setApplicantInReview({ ...applicantInReview, status: "Approved" });
+      toast.success("Applicant Approved Successfully");
+    } catch (error: any) {
+      toast.error("Applicant Could not be approved. Something went wrong.")
+    }
+  };
+
   return (
     <>
+      <AnimatePresence>
+        {rejectDocumentShowing && (
+          <RejectDocument setShowing={setRejectDocumentShowing} />
+        )}
+      </AnimatePresence>
+
       <ToastContainer autoClose={1300} />
       <DashboardNavContainer selectedNav="Dashboard">
         <div className={styles.pageContainer}>
@@ -43,7 +97,7 @@ const Dashboard = () => {
             <h1 className={styles.dashboardHeader}>Admin Dasboard</h1>
             <section className={styles.cardSection}>
               <Card
-                header="Total Applications"
+                header="Applications Started"
                 icon="Applications"
                 loading={applicantNumbersLoading}
                 number={applicantNumbers.total_applications}
@@ -63,16 +117,34 @@ const Dashboard = () => {
             </section>
             <section className={styles.controlsSection}>
               <div className={styles.searchInputContainer}>
-                <SearchInput placeholder="Search For Applicants . . . " />
+                <SearchInput
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                  placeholder="Search For Applicants . . . "
+                />
               </div>
-              <SortButton />
+              <SortButton sortOption={sortOption} onSort={toggleSortOption} />
             </section>
             <TableNav
               selectedNav={selectedNav}
               setSelectedNav={setSelectedNav}
             />
             <ApplicantTable
-              data={applicants?.map((applicant: any) => {
+              sortOption={sortOption}
+              data={(selectedNav == "All Applicants"
+                ? applicants
+                : selectedNav == "In Review"
+                ? applicants.filter(
+                    (applicant: any) => applicant.status == "Being Reviewed"
+                  )
+                : selectedNav == "Approved For Interview"
+                ? applicants.filter(
+                    (applicant: any) => applicant.status == "Approved"
+                  )
+                : applicants.filter(
+                    (applicant: any) => applicant.status == "Submitted"
+                  )
+              )?.map((applicant: any) => {
                 return {
                   firstName: applicant.contactDetails.firstName,
                   lastName: applicant.contactDetails.lastName,
@@ -81,6 +153,7 @@ const Dashboard = () => {
                   profilePicUrl: applicant.documents.profilePicture?.secure_url,
                 };
               })}
+              searchValue={searchValue}
             />
           </section>
           {applicantInReview && (
@@ -89,12 +162,16 @@ const Dashboard = () => {
               animate={{ opacity: 1 }}
               className={styles.viewApplication}
             >
-              <button
-                onClick={() => {}}
+              {applicantInReview.status !== "Approved" && <button
+                onClick={onAproveApplicant}
                 disabled={
-                  !Object.values(applicantInReview.doumentReviewStatuses)
+                  !Object.values(
+                    applicantInReview.doumentReviewStatuses
+                      ? applicantInReview.doumentReviewStatuses
+                      : {}
+                  )
                     .filter(
-                      (item) =>
+                      (item: any) =>
                         item == "Accepted" ||
                         item == "Rejected" ||
                         item == "Being Reviewed"
@@ -102,7 +179,11 @@ const Dashboard = () => {
                     .every((status) => status == "Accepted")
                 }
                 className={`${styles.approveApplicant} ${
-                  !Object.values(applicantInReview.doumentReviewStatuses)
+                  !Object.values(
+                    applicantInReview.doumentReviewStatuses
+                      ? applicantInReview.doumentReviewStatuses
+                      : {}
+                  )
                     .filter(
                       (item) =>
                         item == "Accepted" ||
@@ -115,14 +196,16 @@ const Dashboard = () => {
                 }`}
               >
                 Approve This Applicant
-              </button>
+              </button>}
               <section className={applicationStyles.applicantDetails}>
                 <div
                   className={`${applicationStyles.profilePicContainer} ${styles.profilePic}`}
                 >
                   <img
                     className={applicationStyles.profilePic}
-                    src={applicantInReview.documents.profilePicture?.secure_url}
+                    src={
+                      applicantInReview?.documents?.profilePicture?.secure_url
+                    }
                   />
                 </div>
                 <div className={`${applicationStyles.textContainer} `}>
@@ -143,7 +226,16 @@ const Dashboard = () => {
                   </p>
                 </div>
               </section>
-              <div className={styles.messageIconContainer}>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  router.push(
+                    `/admin/dashboard/messages?user_id=${applicantInReview._id}`
+                  )
+                }
+                className={styles.messageIconContainer}
+              >
                 <div>
                   <svg
                     width="28"
@@ -170,7 +262,7 @@ const Dashboard = () => {
                     />
                   </svg>
                 </div>
-              </div>
+              </motion.div>
               <nav className={applicationStyles.nav}>
                 <ViewApplicationButton
                   active={activeNav == "contact"}
@@ -245,7 +337,11 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className={styles.documentsContainer}>
-                    {Object.keys(applicantInReview.documents)
+                    {Object.keys(
+                      applicantInReview.documents
+                        ? applicantInReview.documents
+                        : {}
+                    )
                       ?.filter((item) => item != "_id")
                       .map((document: any, index: number) => {
                         return (
@@ -266,20 +362,22 @@ const Dashboard = () => {
                     <div className={styles.experienceItems}>
                       <ContactDetailsItem
                         title="Nursing Experience:"
-                        text={applicantInReview.experience.nursingExperience}
+                        text={applicantInReview.experience?.nursingExperience}
                       />
                       <ContactDetailsItem
                         title="Experience in Post Graduate Nursing Specialty Area:"
                         text={
-                          applicantInReview.experience.postGraduateExperience
+                          applicantInReview.experience?.postGraduateExperience
                         }
                       />
                     </div>
                     <AdminDocumentItem
                       status={
-                        applicantInReview.doumentReviewStatuses.proofOfWork
+                        applicantInReview.doumentReviewStatuses?.proofOfWork
                       }
-                      url={applicantInReview?.experience?.secure_url}
+                      url={
+                        applicantInReview?.experience?.proofOfWork?.secure_url
+                      }
                       fieldName={"proofOfWork"}
                     />
                   </div>
