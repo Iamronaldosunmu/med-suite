@@ -1,10 +1,17 @@
+import { Dispatch, SetStateAction } from "react";
 import styles from "./SearchInput.module.css";
 
 interface SearchInputProps {
   placeholder: string;
+  searchValue: string;
+  setSearchValue: Dispatch<SetStateAction<string>>;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ placeholder }) => {
+const SearchInput: React.FC<SearchInputProps> = ({
+  placeholder,
+  searchValue,
+  setSearchValue,
+}) => {
   return (
     <div className={styles.searchContainer}>
       <svg
@@ -19,7 +26,13 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder }) => {
           fill="#8D979F"
         />
       </svg>
-      <input placeholder={placeholder} className={styles.inputContainer} type="text" />
+      <input
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        placeholder={placeholder}
+        className={styles.inputContainer}
+        type="text"
+      />
     </div>
   );
 };
