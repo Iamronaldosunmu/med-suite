@@ -1,27 +1,74 @@
+import client from "../../pages/api/Services/AxiosClient";
 import styles from "./Chatbox.module.css";
+import TimeAgo from 'react-timeago';
 
-const ChatBox = () => {
+
+interface ChatBoxProps {
+  name: string;
+  id: string;
+  selected: boolean;
+  setSelectedChatbox: any;
+  lastMessage: string;
+  unreadCount: number;
+  fetchChatboxes: () => void;
+  createdAt: string;
+  lastMessageFrom: string;
+  profilePicUrl: string;
+}
+
+const ChatBox: React.FC<ChatBoxProps> = ({
+  name,
+  id,
+  selected,
+  setSelectedChatbox,
+  lastMessage,
+  unreadCount,
+  fetchChatboxes,
+  createdAt, 
+  lastMessageFrom, 
+  profilePicUrl
+}) => {
+  const markAllAdminMessagesAsRead = async () => {
+    try {
+      const { data } = await client.post(
+        `/messages/markAllAsRead/${id}?userType=admin`
+      );
+      fetchChatboxes();
+    } catch (err) {
+      alert("Something went wrong on the server");
+      console.log(err);
+    }
+  };
+
+  console.log(unreadCount);
   return (
-    <div className={styles.chatboxContainer}>
+    <div
+      onClick={() => {
+        markAllAdminMessagesAsRead();
+        setSelectedChatbox(id);
+      }}
+      className={`${styles.chatboxContainer} ${
+        selected ? styles.selected : ""
+      }`}
+    >
       <div className={styles.chatBoxInfoContainer}>
         <div className={styles.profileImageContainer}>
-          <img src="https://v3.traincdn.com/genfiles/cms/pg/412/images/1f1073e2eb3241e8bf0cbd5088b8d2ae.svg" />
+          <img src={profilePicUrl} />
         </div>
         <div className={styles.chatBoxInfo}>
           <div>
-            <p className={styles.name}>Dosunmu Ronald</p>
-            <p className={styles.datetime}>2m ago</p>
+            <p className={styles.name}>{name}</p>
+            <p className={styles.datetime}><TimeAgo date={createdAt} /></p>
           </div>
           <div>
-            <p>ID: 123456765432nmkfn32</p>
-            <p className={styles.unreadCount}>2</p>
+            <p>ID: {id}</p>
+            {unreadCount !== 0 && (
+              <p className={styles.unreadCount}>{unreadCount}</p>
+            )}
           </div>
         </div>
       </div>
-      <p className={styles.preview}>
-        Hi there, I am really sorry for the late responseYour documents could
-        not be uploaded, th
-      </p>
+      <p className={styles.preview}>{`${lastMessageFrom == "applicant" ? "Applicant:" : (lastMessageFrom == "admin" ? "You:" : "") } ${lastMessage}`}</p>
     </div>
   );
 };
