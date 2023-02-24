@@ -64,3 +64,11 @@
   height: 100%;
   background-color: rgb(128, 128, 128);
 }
+.noTableContentBanner {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* .noTableContentBanner */
