@@ -7,6 +7,7 @@ import whiteSpinner from "../../components/Lottie/loader.json";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RejectDocument from "../RejectDocumentModal";
 
 interface AdminDocumentItemProps {
   status: string;
@@ -33,8 +34,8 @@ const AdminDocumentItem: React.FC<AdminDocumentItemProps> = ({
     status == "Being Reviewed"
       ? "#D9D9D9"
       : status == "Accepted"
-      ? "#008000"
-      : "#FF0000";
+        ? "#008000"
+        : "#FF0000";
 
   const fieldNameToDocumentName = {
     nursingDegree: "Nursing Degree",
@@ -48,8 +49,11 @@ const AdminDocumentItem: React.FC<AdminDocumentItemProps> = ({
     proofOfWork: "Proof Of Work",
   };
   const documentName = fieldNameToDocumentName[fieldName];
-  const { approveDocument } = useContext(AdminContext);
+  const { approveDocument, rejectDocument, setRejectDocumentShowing, setCurrentFieldName } = useContext(AdminContext);
+
   const [approveLoading, setApproveLoading] = useState(false);
+
+
   const onApproveClick = () => {
     try {
       setApproveLoading(true);
@@ -64,6 +68,24 @@ const AdminDocumentItem: React.FC<AdminDocumentItemProps> = ({
     } finally {
       setApproveLoading(false);
     }
+  };
+
+  const onRejectClick = () => {
+    setRejectDocumentShowing(true);
+    setCurrentFieldName(fieldName)
+    // try {
+    //   setRejectLoading(false);
+    //   rejectDocument(fieldName);
+    //   toast.success(`${documentName} Document Rejected`);
+    // } catch (err: any) {
+    //   if (err.response && err.response.status == 500)
+    //     alert("Something went wrong on the server 🥲");
+    //   else {
+    //     alert("Could not Fetch data");
+    //   }
+    // } finally {
+    //   setApproveLoading(false);
+    // }
   };
 
   return (
@@ -107,7 +129,15 @@ const AdminDocumentItem: React.FC<AdminDocumentItemProps> = ({
                 />
               )}
             </button>
-            <button style={{ backgroundColor: "#FF0000" }}>Reject</button>
+            <button
+              onClick={onRejectClick}
+              style={{ backgroundColor: "#FF0000" }}
+            >
+                <motion.span animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
+                  Reject
+                </motion.span>
+
+            </button>
           </div>
         )}
         {status == "Rejected" && (
