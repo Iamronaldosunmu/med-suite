@@ -28,8 +28,8 @@ interface DocumentItemProps {
     | "proofOfWork"
     | "profilePicture";
   public_id: string;
-  documents: any[];
-  setDocuments: Dispatch<SetStateAction<any[]>>;
+  documents: any[] | any;
+  setDocuments: Dispatch<SetStateAction<any[]>> | Dispatch<SetStateAction<any>>;
 }
 const defaultDocument = {
   secure_url: "",
@@ -92,21 +92,37 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
         payload
       );
 
-      const documentsCopy = documents;
-      let index = documentsCopy.findIndex(
-        (document) => document.fieldName == fieldName
-      );
-      documentsCopy[index] = {
-        status: "Being Reviewed",
-        fieldName,
-        ...payload[fieldName],
-      };
-      setDocuments(documentsCopy);
+      console.log(response, response2);
+
+      if (fieldName !== "proofOfWork") {
+        const documentsCopy = documents;
+        let index = documentsCopy.findIndex(
+          (document : any) => document.fieldName == fieldName
+        );
+        documentsCopy[index] = {
+          status: "Being Reviewed",
+          fieldName,
+          ...payload[fieldName],
+        };
+        setDocuments(documentsCopy);
+      }
+      else {
+        setDocuments({
+          status: "Being Reviewed",
+          ...payload[fieldName],
+        })
+      }
+
+
       const cookiesCopy = cookies.applicant;
       cookiesCopy.doumentReviewStatuses[fieldName] = "Being Reviewed";
-      cookiesCopy.documents[fieldName] = payload[fieldName];
+      if (fieldName !== "proofOfWork") {
+        cookiesCopy.documents[fieldName] = payload[fieldName];
+      } else {
+        cookiesCopy.experience[fieldName] = payload[fieldName];
+      }
       setCookie("applicant", cookiesCopy);
-
+      localStorage.setItem("applicant", JSON.stringify(cookiesCopy))
     } catch (error: any) {
       if (!error.response) alert("Please Check your Internet Connection🥲");
       else {
