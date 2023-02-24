@@ -174,6 +174,7 @@ const MessagePage = () => {
                   {selectedChatBoxObject?.messages?.map(
                     (message: any, index: number) => (
                       <Message
+                        key={index}
                         content={message.content}
                         // profilePic={selectedChatBoxObject?.applicant?.documents?.profilePicture}
                         layoutId={index}
