@@ -15,6 +15,7 @@ import MobileNav from "../../components/MobileNav";
 import ChatButton from "../../components/ChatButton";
 import DesktopNav from "../../components/DesktopNav";
 import ContactUsModal from "../../components/ContactUsModal";
+import client from "../api/Services/AxiosClient";
 
 const ViewApplication = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
@@ -27,7 +28,9 @@ const ViewApplication = () => {
     if (!cookies.user) {
       router.push("/login");
     } else {
+      // const { data } = client.get(`/applicant/${cookies.user.}`)
       if (clientLoaded) {
+        console.log(JSON.parse(localStorage.getItem("applicant")!));
         setApplicant(JSON.parse(localStorage.getItem("applicant")!)), 500;
         setFirstName(
           JSON.parse(localStorage.getItem("applicant")!).contactDetails
@@ -82,15 +85,18 @@ const ViewApplication = () => {
         status: JSON.parse(localStorage.getItem("applicant")!)
           .doumentReviewStatuses?.proofOfWork,
       });
-      const fields = Object.keys(JSON.parse(localStorage.getItem("applicant")!).documents).filter(
-        (item) => item !== "_id"
-      );
+      const fields = Object.keys(
+        JSON.parse(localStorage.getItem("applicant")!).documents
+      ).filter((item) => item !== "_id");
 
       setDocuments(
         fields.map((fieldName) => ({
           fieldName,
-          status: JSON.parse(localStorage.getItem("applicant")!).doumentReviewStatuses[fieldName],
-          ...JSON.parse(localStorage.getItem("applicant")!).documents[fieldName],
+          status: JSON.parse(localStorage.getItem("applicant")!)
+            .doumentReviewStatuses[fieldName],
+          ...JSON.parse(localStorage.getItem("applicant")!).documents[
+            fieldName
+          ],
         }))
       );
     }
@@ -243,8 +249,8 @@ const ViewApplication = () => {
             </div>
             <p className={styles.smallHeader}>Proof Of Work</p>
             <DocumentItem
-              documents={documents}
-              setDocuments={setDocuments}
+              documents={proofOfWork}
+              setDocuments={setProofOfWork}
               fieldName="proofOfWork"
               fileName={proofOfWork.fileName}
               url={proofOfWork.secure_url}
