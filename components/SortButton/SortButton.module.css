@@ -10,4 +10,6 @@
   border-radius: 5px;
   gap: 11px;
   color: #b7bbc1;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }

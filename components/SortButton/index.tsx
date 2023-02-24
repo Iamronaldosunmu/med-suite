@@ -1,11 +1,25 @@
 import styles from "./SortButton.module.css";
+import { motion } from "framer-motion";
 
-const SortButton = () => {
+interface SortButtonProps {
+  onSort: () => void;
+  sortOption: number;
+}
+
+const SortButton: React.FC<SortButtonProps> = ({ onSort, sortOption }) => {
   return (
-    <div className={styles.container}>
+    <motion.div
+      onClick={onSort}
+      whileHover={{ scale: 1.04 }}
+      className={styles.container}
+      style={{backgroundColor: sortOption > 0 ? "#d5d5d5" : "#f5f5f5"}}
+    >
       <p>Sort</p>
-      <img src="/images/sortIcon.png" />
-    </div>
+      <motion.img
+        animate={{ rotateZ: sortOption < 2 ? "180deg" : "0deg" }}
+        src="/images/sortIcon.png"
+      />
+    </motion.div>
   );
 };
 
