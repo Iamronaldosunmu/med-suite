@@ -84,7 +84,7 @@ const ContactDetails = () => {
       `/applicant/${cookies.user.applicantId}`
     );
     setCookie("applicant", applicantData.applicant);
-    localStorage?.set("applicant", applicantData.applicant);
+    localStorage?.setItem("applicant", JSON.stringify(applicantData.applicant));
   };
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -133,6 +133,7 @@ const ContactDetails = () => {
         await updateCookies();
         router.push("/application_form/documents");
       } catch (error: any) {
+        console.log(error)
         if (!error.response) alert("Please Check your internet Connection.");
         else {
           alert(error.response?.data?.message);

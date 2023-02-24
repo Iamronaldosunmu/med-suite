@@ -88,6 +88,11 @@ const Experience = () => {
           `/applicant/experience/${cookies.user.applicantId}`,
           payload
         );
+        const { data: applicantData } = await client.get(
+          `/applicant/${cookies.user.applicantId}`
+        );
+        setCookie("applicant", applicantData.applicant);
+        localStorage?.setItem("applicant", JSON.stringify(applicantData.applicant));
         router.push(redirectPath);
       } catch (error: any) {
         if (!error.response) alert("Please Check your internet Connection.");
@@ -111,6 +116,7 @@ const Experience = () => {
       ...cookies.applicant,
       experience: { nursingExperience, postGraduateExperience, proofOfWork },
     });
+    localStorage?.setItem("applicant", JSON.stringify(cookies.applicant));
     router.push("/application_form/documents");
   };
   return (

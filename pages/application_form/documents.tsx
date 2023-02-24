@@ -121,6 +121,11 @@ const Documents = () => {
           path: "/",
           maxAge: 1800
         });
+        const { data: applicantData } = await client.get(
+          `/applicant/${cookies.user.applicantId}`
+        );
+        setCookie("applicant", applicantData.applicant);
+        localStorage?.setItem("applicant", JSON.stringify(applicantData.applicant));
         router.push("/application_form/experience");
       } catch (error: any) {
         if (!error.response) alert("Please Check your internet Connection.");
