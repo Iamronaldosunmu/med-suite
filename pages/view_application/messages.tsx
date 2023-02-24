@@ -18,7 +18,6 @@ const Messages = () => {
   const messagesContainer = useRef<HTMLDivElement>(null);
 
   const fetchMessages = async () => {
-    console.log(cookies.user.applicantId);
     try {
       const { data } = await client.get(
         `/messages/${cookies?.user?.applicantId}`
