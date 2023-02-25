@@ -30,7 +30,7 @@ const MessagePage = () => {
     if (!router.isReady) return;
     if (
       user_id &&
-      chatBoxes.find((chatBox: any) => chatBox.applicant._id == user_id)
+      chatBoxes.find((chatBox: any) => chatBox?.applicant._id == user_id)
         ?.length !== 0
     )
       setSelectedChatbox(user_id);
@@ -38,7 +38,7 @@ const MessagePage = () => {
 
   useEffect(() => {
     setSelectedChatboxObject(
-      chatBoxes.find((chatBox: any) => chatBox.applicant._id == selectedChatbox)
+      chatBoxes.find((chatBox: any) => chatBox?.applicant._id == selectedChatbox)
     );
   }, [selectedChatbox, chatBoxes]);
 
@@ -97,14 +97,14 @@ const MessagePage = () => {
             {chatBoxes
               .filter((chatbox: any) =>
                 [
-                  chatbox.applicant.contactDetails.firstName.toLowerCase(),
-                  chatbox.applicant.contactDetails.lastName.toLowerCase(),
-                  chatbox.applicant._id.toLowerCase(),
+                  chatbox?.applicant.contactDetails.firstName.toLowerCase(),
+                  chatbox?.applicant.contactDetails.lastName.toLowerCase(),
+                  chatbox?.applicant._id.toLowerCase(),
                 ].some((item) => item.includes(searchValue.toLowerCase()))
               )
               .map((chatbox: any, index: any) => (
                 <ChatBox
-                  profilePicUrl={chatbox.applicant.documents.profilePicture.secure_url}
+                  profilePicUrl={chatbox?.applicant.documents.profilePicture.secure_url}
                   setSelectedChatbox={setSelectedChatbox}
                   lastMessage={
                     chatbox.messages.length
@@ -126,12 +126,12 @@ const MessagePage = () => {
                     chatbox.messages
                       .filter((message: any) => message.from == "applicant")
                       .filter(
-                        (message: any) => message.status.applicant == "unread"
+                        (message: any) => message.status?.applicant == "unread"
                       ).length
                   }
-                  selected={selectedChatbox == chatbox.applicant._id}
+                  selected={selectedChatbox == chatbox?.applicant._id}
                   id={chatbox.applicant._id}
-                  name={`${chatbox.applicant?.contactDetails?.firstName} ${chatbox.applicant?.contactDetails?.lastName}`}
+                  name={`${chatbox?.applicant?.contactDetails?.firstName} ${chatbox?.applicant?.contactDetails?.lastName}`}
                   key={index}
                 />
               ))}
