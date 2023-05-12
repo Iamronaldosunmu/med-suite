@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { PaystackButton } from "react-paystack";
 import Button from "../../components/Button";
@@ -13,6 +13,13 @@ import client from "../api/Services/AxiosClient";
 const ApplicationFee = () => {
   const router = useRouter();
   const [cookies, setCookie, removeCookie] = useCookies(["user", "applicant"]);
+  const [freeButtonLoading, setFreeButtonLoading] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== undefined)
+    alert(`We are Waiving the application Fee for the First 50 applicants. 
+    To proceed without paying, click the 'Apply For free' button.`)
+  }, [])
 
   useEffect(() => {
     if (!cookies.user || !cookies.applicant) router.push("/login");
@@ -70,6 +77,20 @@ const ApplicationFee = () => {
           >
             <PaystackButton {...componentProps} />
           </div>
+          <Button
+            color="#FF6B00"
+            onClick={() => {
+              try {
+                setFreeButtonLoading(true);
+                markPaymentAsCompleted()
+              } catch (err : any) {
+                alert (err.message)
+              } finally {
+                setFreeButtonLoading(false);
+              }
+            }}
+            text={freeButtonLoading ? "Loading..." : "Apply For Free"}
+          />
           <Button
             onClick={() => router.push("/application_form/experience")}
             text="Prev < Experience"
