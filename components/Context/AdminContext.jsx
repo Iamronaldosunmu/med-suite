@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import client from "../../pages/api/Services/AxiosClient";
 import { toast } from "react-toastify";
+import { Router, useRouter } from "next/router";
 
 
 
@@ -8,6 +9,8 @@ export const AdminContext = createContext();
 
 
 const AdminContextProvider = ({ children }) => {
+  const router = useRouter()
+
   // State for the applicant data
     const [applicantNumbers, setApplicantNumbers] = useState({
         total_applications: 0,
@@ -90,18 +93,23 @@ const AdminContextProvider = ({ children }) => {
   const fetchChatboxes = async () => {
     try {
       setLoadingChatboxes(true);
-      const { data : { chats } } = await client.get("/messages");
-              chats.sort(function(chatbox1 , chatbox2 ){return chatbox2.messages
-          .filter((message) => message.from == "applicant")
-          .filter(
-            (message) => message.status.applicant == "unread"
-          ).length - chatbox1.messages
-          .filter((message) => message.from == "applicant")
-          .filter(
-            (message) => message.status.applicant == "unread"
-          ).length});
-      setChatboxes(chats);
-      console.log(chats)
+      const { data: { chats } } = await client.get("/messages");
+      console.log(chats);
+
+      if (chats) {
+        chats?.sort(function(chatbox1 , chatbox2 ) {return chatbox2?.messages
+    ?.filter((message) => message?.from == "applicant")
+    ?.filter(
+      (message) => message?.status?.applicant == "unread"
+    )?.length - chatbox1?.messages
+    ?.filter((message) => message?.from == "applicant")
+    ?.filter(
+      (message) => message?.status?.applicant == "unread"
+    )?.length});
+  setChatboxes(chats);
+
+      }
+      
     } catch (error) {
       console.log(error)
       alert("Could Not fetch the chatboxes!");
@@ -111,7 +119,9 @@ const AdminContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setInterval(() => fetchChatboxes(), 5000);
+    if (router.pathname.startsWith("/admin")) {
+      setInterval(() => fetchChatboxes(), 5000);
+    }
   }, []);
 
 
